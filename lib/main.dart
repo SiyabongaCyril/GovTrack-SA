@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gov_track_sa/screens/get_started.dart';
+import 'package:gov_track_sa/screens/signup_screen.dart';
 import 'package:gov_track_sa/utilities/navigators.dart';
-//import 'package:gov_track_sa/screens/testing_screen.dart';
 import 'screens/welcome_screen.dart';
 
 void main() {
@@ -27,7 +26,7 @@ class GovTrackSA extends StatelessWidget {
       theme: ThemeData(
         fontFamily: "Montserrat",
       ),
-      routes: {getStarted: (context) => const GetStartedScreen()},
+      routes: {signup: (context) => const SignupScreen()},
     );
   }
 }

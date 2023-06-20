@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const getStarted = "/getstarted";
+const signup = "/signup";
 
 void navigateAndPushNamed(
   BuildContext context,

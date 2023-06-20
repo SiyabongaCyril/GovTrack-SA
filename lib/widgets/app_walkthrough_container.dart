@@ -13,10 +13,10 @@ class AppWalkthrough extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
     return Container(
       alignment: Alignment.bottomCenter,
-      padding: EdgeInsets.only(bottom: proportionalHeight(screenHeight, 32.5)),
+      padding: EdgeInsets.only(bottom: proportionalHeight(screenHeight, 95)),
       width: screenWidth,
       height: screenHeight,
-      color: grey,
+      color: white,
       child: Container(
         width: proportionalWidth(screenWidth, 320),
         height: proportionalHeight(screenHeight, 199),

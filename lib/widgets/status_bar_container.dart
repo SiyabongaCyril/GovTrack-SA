@@ -6,12 +6,14 @@ import 'package:gov_track_sa/utilities/app_colors.dart';
 //The unsafe area is of a black color (AppBar will always be black)
 class StatusBarContainer extends StatelessWidget {
   final Widget widget;
-  const StatusBarContainer({super.key, required this.widget});
+  final Color color;
+  const StatusBarContainer(
+      {super.key, required this.widget, this.color = black});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: black,
+      color: color,
       child: SafeArea(
         child: widget,
       ),

@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:gov_track_sa/utilities/app_colors.dart';
 import '/utilities/dimension_methods.dart';
 
-class WalkthroughPageCircle extends StatefulWidget {
-  final Color circleColor;
-  const WalkthroughPageCircle({super.key, required this.circleColor});
+enum CircleColors { white, orange }
 
-  @override
-  State<WalkthroughPageCircle> createState() => _WalkthroughPageCircleState();
-}
+class WalkthroughPageCircle extends StatelessWidget {
+  final CircleColors circleColor;
+  const WalkthroughPageCircle(
+      {super.key, this.circleColor = CircleColors.white});
 
-class _WalkthroughPageCircleState extends State<WalkthroughPageCircle> {
   @override
   Widget build(BuildContext context) {
     double statusBarHeight = MediaQuery.of(context).padding.top;
@@ -26,7 +25,7 @@ class _WalkthroughPageCircleState extends State<WalkthroughPageCircle> {
             border: const Border.fromBorderSide(
                 BorderSide(strokeAlign: BorderSide.strokeAlignOutside)),
             shape: BoxShape.circle,
-            color: widget.circleColor,
+            color: circleColor == CircleColors.white ? white : orange,
           ),
         ),
       ],

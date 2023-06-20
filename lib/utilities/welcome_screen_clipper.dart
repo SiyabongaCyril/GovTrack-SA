@@ -10,7 +10,7 @@ class WelcomeBottomClipper extends CustomClipper<Path> {
   Path getClip(Size size) {
     final path = Path();
 
-    path.moveTo(0, proportionalHeight(screenHeight, 521));
+    path.moveTo(0, proportionalHeight(screenHeight, 421));
     path.lineTo(0, screenHeight);
     path.lineTo(screenWidth, screenHeight);
     path.lineTo(screenWidth, proportionalHeight(screenHeight, 298));
