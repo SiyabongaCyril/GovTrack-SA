@@ -1,13 +1,9 @@
-import 'package:gov_track_sa/widgets/app_walkthrough_container.dart';
-import 'package:gov_track_sa/widgets/walkthrough_page_circle.dart';
-import 'package:gov_track_sa/utilities/navigators.dart';
+import 'screen_barrel.dart';
+import 'package:gov_track_sa/widgets/walkthrough_page_custom_widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter/material.dart';
 import '/utilities/welcome_screen_clipper.dart';
-import '/utilities/dimension_methods.dart';
-import '/utilities/app_colors.dart';
-import '/widgets/status_bar_container.dart';
 
+//App's first route, the welcome screen
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
 
@@ -16,7 +12,10 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
+  //track's application description's current page
   int pageNum = 0;
+  //the welcome page-button to the next page will only render
+  //if the last page of  application description's pages has been viewed
   bool showButton = false;
 
   @override
@@ -31,11 +30,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         body: Stack(
           alignment: Alignment.center,
           children: [
+            //The top clipped container
             Container(
               width: screenWidth,
               height: screenHeight,
               color: navyBlue,
             ),
+            //Welcome Text, render on top of the top clipped container
             Positioned(
               top: proportionalHeight(screenHeight, 53),
               left: proportionalWidth(screenWidth, 17),
@@ -45,12 +46,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 "Your government info\n"
                 "All In One Place!",
                 style: TextStyle(
-                  fontSize: proportionalHeight(screenHeight, 20),
+                  fontSize: proportionalHeight(screenHeight, 18),
                   fontWeight: FontWeight.w600,
                   color: white,
                 ),
               ),
             ),
+            //image rendered on top of the top clipped container
             Positioned(
               left: proportionalWidth(screenWidth, 0),
               top: proportionalHeight(screenHeight, 200),
@@ -60,18 +62,22 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 height: proportionalHeight(screenHeight, 210),
               ),
             ),
+            //The bottom clipped container & its contents
             ClipPath(
               clipper: WelcomeBottomClipper(screenWidth, screenHeight),
+              //Page view for all the application description pages
               child: PageView(
                 onPageChanged: (value) {
                   setState(() {
                     pageNum = value;
                     if (pageNum == 3) showButton = true;
+                    //show navigation button on last page
                   });
                 },
                 scrollDirection: Axis.horizontal,
                 children: [
-                  for (var i = 0; i < 4; i++) AppWalkthrough(featureIndex: i),
+                  for (var i = 0; i < 4; i++)
+                    AppWalkthrough(appDescriptionIndex: i),
                 ],
               ),
             ),
@@ -106,33 +112,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         bottom: proportionalHeight(screenHeight, 18.5),
                       ),
                       child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Container(
-                              width: proportionalWidth(screenWidth, 131),
-                              height: proportionalHeight(screenHeight, 33),
-                              decoration: const BoxDecoration(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(50),
-                                ),
-                                color: navyBlue,
-                              ),
-                              child: ElevatedButton(
-                                style: const ButtonStyle(
-                                    shadowColor: MaterialStatePropertyAll(
-                                        Colors.transparent),
-                                    backgroundColor: MaterialStatePropertyAll(
-                                        Colors.transparent)),
-                                onPressed: () {
-                                  navigateAndPushNamed(context, signup);
-                                },
-                                child: const Text("Get Started"),
-                              ),
-                            ),
-                            SizedBox(
-                              width: proportionalWidth(screenWidth, 20),
-                            )
-                          ]),
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          CustomButtonContainer(
+                            text: "Get started",
+                            onPressed: () =>
+                                navigateAndPushNamed(context, signup),
+                          ),
+                          SizedBox(
+                            width: proportionalWidth(screenWidth, 20),
+                          )
+                        ],
+                      ),
                     ),
                   )
                 : SizedBox(

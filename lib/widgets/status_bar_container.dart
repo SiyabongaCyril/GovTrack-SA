@@ -1,9 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:gov_track_sa/utilities/app_colors.dart';
+import 'widget_barrel.dart';
 
-//All screens should use this widget as their parent
-//Screen content wrapped in a safe area
-//The unsafe area is of a black color (AppBar will always be black)
+// All screens should use this widget as their parent
+// Screen content wrapped in a safe area
+// The unsafe area is a preferrred color, black by default & if not provided)
 class StatusBarContainer extends StatelessWidget {
   final Widget widget;
   final Color color;

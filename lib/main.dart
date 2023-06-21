@@ -3,30 +3,20 @@ import 'package:gov_track_sa/screens/signup_screen.dart';
 import 'package:gov_track_sa/utilities/navigators.dart';
 import 'screens/welcome_screen.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const GovTrackSA();
-  }
-}
-
-class GovTrackSA extends StatelessWidget {
-  const GovTrackSA({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const WelcomeScreen(),
+      home: const WelcomeScreen(), // Set the home screen to WelcomeScreen
       theme: ThemeData(
-        fontFamily: "Montserrat",
+        fontFamily: "Montserrat", // Set the default font family
       ),
-      routes: {signup: (context) => const SignupScreen()},
+      routes: {
+        // Define app's named routes
+        signup: (context) => const SignupScreen(),
+      },
     );
   }
 }

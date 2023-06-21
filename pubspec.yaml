@@ -75,7 +75,12 @@ flutter:
       - asset: assets/fonts/Montserrat-Regular.ttf
       - asset: assets/fonts/Montserrat-SemiBold.ttf
       - asset: assets/fonts/Montserrat-Light.ttf
-        weight: 700
+      - asset: assets/fonts/Inter-Bold.ttf 
+      - asset: assets/fonts/Inter-Light.ttf 
+      - asset: assets/fonts/Inter-Medium.ttf 
+      - asset: assets/fonts/Inter-Regular.ttf 
+      - asset: assets/fonts/Inter-SemiBold.ttf
+        weight: 500
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,10 +1,7 @@
-import 'package:gov_track_sa/widgets/custom_button_container.dart';
-import 'package:gov_track_sa/widgets/signup_option_button.dart';
-import 'package:gov_track_sa/widgets/status_bar_container.dart';
+import 'screen_barrel.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter/material.dart';
-import '/utilities/dimension_methods.dart';
-import '/utilities/app_colors.dart';
+
+import '../widgets/signup_custom_widgets.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -14,12 +11,12 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
-  Color _loginButtonColor = white;
-  Color _loginTextColor = black;
-  Color _loginBorderColor = black;
-  Color _signupButtonColor = black;
-  Color _signupTextColor = white;
-  Color _signupBorderColor = white;
+  Color loginButtonColor = white;
+  Color loginTextColor = black;
+  Color loginBorderColor = black;
+  Color signupButtonColor = black;
+  Color signupTextColor = white;
+  Color signupBorderColor = orange;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +42,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 "Empowering Citizens,\nTracking Progress",
                 textAlign: TextAlign.end,
                 style: TextStyle(
-                  fontSize: proportionalHeight(screenHeight, 20),
+                  fontSize: proportionalHeight(screenHeight, 18),
                   fontWeight: FontWeight.bold,
                   color: black,
                 ),
@@ -82,22 +79,12 @@ class _SignupScreenState extends State<SignupScreen> {
                       children: [
                         Align(
                           alignment: Alignment.centerRight,
-                          child: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                _loginButtonColor = black;
-                                _loginTextColor = white;
-                                _signupButtonColor = white;
-                                _signupTextColor = black;
-                              });
-                            },
-                            child: CustomButtonContainer(
-                              onPressed: () {},
-                              text: "Login",
-                              color: _loginButtonColor,
-                              textColor: _loginTextColor,
-                              borderColor: _loginBorderColor,
-                            ),
+                          child: CustomButtonContainer(
+                            onPressed: () {},
+                            text: "Login",
+                            color: loginButtonColor,
+                            textColor: loginTextColor,
+                            borderColor: loginBorderColor,
                           ),
                         ),
                         Align(
@@ -105,9 +92,9 @@ class _SignupScreenState extends State<SignupScreen> {
                           child: CustomButtonContainer(
                             onPressed: () {},
                             text: "Sign-up",
-                            color: _signupButtonColor,
-                            textColor: _signupTextColor,
-                            borderColor: _signupBorderColor,
+                            color: signupButtonColor,
+                            textColor: signupTextColor,
+                            borderColor: signupBorderColor,
                           ),
                         ),
                       ],

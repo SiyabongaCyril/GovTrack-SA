@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
+// App navigators
 const signup = "/signup";
+
+// Methods for navigation
 
 void navigateAndPushNamed(
   BuildContext context,
