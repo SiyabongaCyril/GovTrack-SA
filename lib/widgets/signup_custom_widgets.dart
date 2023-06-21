@@ -16,6 +16,13 @@ class SignupFieldContainer extends StatelessWidget {
 
     return Center(
       child: Container(
+        padding: EdgeInsets.only(
+          left: proportionalWidth(screenWidth, 20),
+          right: proportionalWidth(screenWidth, 20),
+          top: proportionalHeight(screenHeight, 10),
+          bottom: proportionalHeight(screenHeight, 10),
+        ),
+        alignment: Alignment.centerLeft,
         width: proportionalWidth(screenWidth, 287),
         height: proportionalHeight(screenHeight, 50),
         decoration: BoxDecoration(
@@ -53,6 +60,8 @@ class SignupOptionButton extends StatelessWidget {
             width: proportionalWidth(screenWidth, 26),
           ),
           SizedBox(
+            height: proportionalHeight(screenHeight, 20),
+            width: proportionalWidth(screenWidth, 20),
             child: widget,
           ),
           SizedBox(
@@ -68,6 +77,64 @@ class SignupOptionButton extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+//Defines all textfields for signing up and logging in
+class SignupLoginTextField extends StatelessWidget {
+  final String headingText;
+  final String hintText;
+  const SignupLoginTextField(
+      {super.key, this.hintText = "", required this.headingText});
+
+  @override
+  Widget build(BuildContext context) {
+    double statusBarHeight = MediaQuery.of(context).padding.top;
+    double screenHeight = MediaQuery.of(context).size.height - statusBarHeight;
+    return Column(
+      children: [
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            headingText,
+            style: const TextStyle(
+              fontSize: 17,
+              fontFamily: "Inter",
+              fontWeight: FontWeight.w300,
+            ),
+          ),
+        ),
+        SizedBox(
+          height: proportionalHeight(screenHeight, 7),
+        ),
+        SignupFieldContainer(
+          widget: TextField(
+            style: const TextStyle(
+              fontSize: 16,
+              fontFamily: "Inter",
+              fontWeight: FontWeight.w300,
+              color: navyBlue,
+            ),
+            textAlign: TextAlign.justify,
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.only(
+                bottom: proportionalHeight(screenHeight, 13),
+              ),
+              hintText: hintText,
+              hintStyle: const TextStyle(
+                fontSize: 16,
+                fontFamily: "Inter",
+                fontWeight: FontWeight.w300,
+              ),
+            ),
+          ),
+        ),
+        SizedBox(
+          height: proportionalHeight(screenHeight, 12),
+        )
+      ],
     );
   }
 }
