@@ -1,103 +1,144 @@
-import 'package:flutter/material.dart';
-// import 'package:gov_track_sa/widgets/status_bar_container.dart';
-// import '../utilities/dimension_methods.dart';
-
-// class TestScreen extends StatefulWidget {
-//   const TestScreen({super.key});
+// class SignupScreen extends StatefulWidget {
+//   const SignupScreen({super.key});
 
 //   @override
-//   State<TestScreen> createState() => _TestScreenState();
+//   State<SignupScreen> createState() => _SignupScreenState();
 // }
 
-// class _TestScreenState extends State<TestScreen> {
+// class _SignupScreenState extends State<SignupScreen> {
+//   Color loginButtonColor = white;
+//   Color loginTextColor = black;
+//   Color loginBorderColor = black;
+//   Color signupButtonColor = black;
+//   Color signupTextColor = white;
+//   Color signupBorderColor = orange;
+
 //   @override
 //   Widget build(BuildContext context) {
 //     double statusBarHeight = MediaQuery.of(context).padding.top;
 //     double screenHeight = MediaQuery.of(context).size.height - statusBarHeight;
-//     //double screenWidth = MediaQuery.of(context).size.width;
+//     double screenWidth = MediaQuery.of(context).size.width;
+//     //  proportionalHeight(screenHeight, 73),
+//     //  proportionalWidth(screenWidth, 17),
 //     return StatusBarContainer(
+//       color: Colors.white,
 //       widget: Scaffold(
-//         body: ListView(
-//           scrollDirection: Axis.vertical,
-//           children: [
-//             Text(
-//               features[0],
-//               style: TextStyle(
-//                 fontSize: proportionalHeight(screenHeight, 16),
-//                 fontWeight: FontWeight.normal,
+//         body: Container(
+//           margin: EdgeInsets.only(
+//             top: proportionalHeight(screenHeight, 50),
+//             bottom: proportionalHeight(screenHeight, 47),
+//             left: proportionalWidth(screenWidth, 36),
+//             right: proportionalWidth(screenWidth, 36),
+//           ),
+//           child: Column(
+//             crossAxisAlignment: CrossAxisAlignment.center,
+//             children: [
+//               Text(
+//                 "Empowering Citizens,\nTracking Progress",
+//                 textAlign: TextAlign.end,
+//                 style: TextStyle(
+//                   fontSize: proportionalHeight(screenHeight, 18),
+//                   fontWeight: FontWeight.bold,
+//                   color: black,
+//                 ),
 //               ),
-//             ),
-//             Text(
-//               features[1],
-//               style: TextStyle(
-//                 fontSize: proportionalHeight(screenHeight, 16),
-//                 fontWeight: FontWeight.normal,
+//               Align(
+//                 alignment: Alignment.centerRight,
+//                 child: Stack(
+//                   children: [
+//                     SvgPicture.asset(
+//                       "assets/images/South African Map.svg",
+//                       width: proportionalWidth(screenWidth, 150),
+//                       height: proportionalHeight(screenHeight, 150),
+//                     ),
+//                     Positioned(
+//                       left: proportionalWidth(screenWidth, 28),
+//                       top: proportionalHeight(screenHeight, 120),
+//                       child: SvgPicture.asset(
+//                         "assets/images/South African Flag.svg",
+//                         width: proportionalWidth(screenWidth, 20),
+//                         height: proportionalHeight(screenHeight, 20),
+//                       ),
+//                     )
+//                   ],
+//                 ),
 //               ),
-//             ),
-//             Text(
-//               features[2],
-//               style: TextStyle(
-//                 fontSize: proportionalHeight(screenHeight, 16),
-//                 fontWeight: FontWeight.normal,
+//               const Spacer(),
+//               Align(
+//                 alignment: Alignment.centerLeft,
+//                 child: SizedBox(
+//                   width: proportionalWidth(screenWidth, 230),
+//                   child: Align(
+//                     alignment: Alignment.centerLeft,
+//                     child: Stack(
+//                       children: [
+//                         Align(
+//                           alignment: Alignment.centerRight,
+//                           child: CustomButtonContainer(
+//                             onPressed: () {},
+//                             text: "Login",
+//                             color: loginButtonColor,
+//                             textColor: loginTextColor,
+//                             borderColor: loginBorderColor,
+//                           ),
+//                         ),
+//                         Align(
+//                           alignment: Alignment.centerLeft,
+//                           child: CustomButtonContainer(
+//                             onPressed: () {},
+//                             text: "Sign-up",
+//                             color: signupButtonColor,
+//                             textColor: signupTextColor,
+//                             borderColor: signupBorderColor,
+//                           ),
+//                         ),
+//                       ],
+//                     ),
+//                   ),
+//                 ),
 //               ),
-//             ),
-//             Text(
-//               features[3],
-//               style: TextStyle(
-//                 fontSize: proportionalHeight(screenHeight, 16),
-//                 fontWeight: FontWeight.normal,
+//               SizedBox(
+//                 height: proportionalHeight(screenHeight, 36),
 //               ),
-//             ),
-//           ],
+//               const SignupOptionButton(
+//                 text: "Gmail",
+//                 widget: Icon(
+//                   Icons.logo_dev,
+//                 ),
+//               ),
+//               SizedBox(
+//                 height: proportionalHeight(screenHeight, 12),
+//               ),
+//               const SignupOptionButton(
+//                 text: "Phone",
+//                 widget: Icon(
+//                   Icons.call_rounded,
+//                 ),
+//               ),
+//               SizedBox(
+//                 height: proportionalHeight(screenHeight, 12),
+//               ),
+//               const SignupOptionButton(
+//                 text: "Other Options",
+//                 widget: Icon(
+//                   Icons.more_vert_rounded,
+//                 ),
+//               ),
+//               SizedBox(
+//                 height: proportionalHeight(screenHeight, 35),
+//               ),
+//               Align(
+//                 alignment: Alignment.centerRight,
+//                 child: CustomButtonContainer(
+//                   onPressed: () {},
+//                   text: "Sign up",
+//                 ),
+//               )
+//             ],
+//           ),
 //         ),
 //       ),
 //     );
 //   }
 // }
 
-// List<String> features = [
-//   "View Politician's Profiles",
-//   "Access Political Party Information",
-//   "Do you want an aleter for the\nState of the Nation Address\nWe got you.",
-//   "Offline Access?\nLet's get started."
-// ];
-
-class SwipeableTextScreen extends StatelessWidget {
-  SwipeableTextScreen({super.key});
-
-  final List<String> texts = [
-    'Text 1',
-    'Text 2',
-    'Text 3',
-    'Text 4',
-    'Text 5',
-    'Text 6',
-    'Text 7',
-    'Text 8',
-    'Text 9',
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Swipeable Text Screen'),
-      ),
-      body: PageView(
-        children: [
-          Container(
-            color: Colors.grey[300],
-            child: ListView.builder(
-              itemCount: texts.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(texts[index]),
-                );
-              },
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
