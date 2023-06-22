@@ -8,6 +8,7 @@ const gmailsignup = "/gmailsignup";
 const login = "/login";
 const welcome = "/welcome";
 const phonesignup = "/phonesignup";
+const homepage = "/homepage";
 
 // Methods for navigation
 

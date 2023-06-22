@@ -1,8 +1,6 @@
 import 'dart:developer';
-
 import 'package:gov_track_sa/screens/screen_barrel.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-//import '/widgets/signup_custom_widgets.dart';
 
 enum ButtonType { login, signup, none }
 
@@ -23,17 +21,6 @@ class SignupLoginSamplePage extends StatefulWidget {
 }
 
 class _SignupLoginSamplePageState extends State<SignupLoginSamplePage> {
-  //Colors for the sign up or login option button
-
-  //Login button colors
-  Color loginButtonColor = white;
-  Color loginTextColor = black;
-  Color loginBorderColor = black;
-  // Signup button colors
-  Color signupButtonColor = black;
-  Color signupTextColor = white;
-  Color signupBorderColor = black;
-
   @override
   Widget build(BuildContext context) {
     double statusBarHeight = MediaQuery.of(context).padding.top;
@@ -86,7 +73,9 @@ class _SignupLoginSamplePageState extends State<SignupLoginSamplePage> {
                       ),
                     )
                   : const SizedBox(),
-              SizedBox(height: proportionalHeight(screenHeight, 30)),
+              SizedBox(
+                height: proportionalHeight(screenHeight, 30),
+              ),
               Align(
                 alignment: Alignment.centerLeft,
                 child: SizedBox(
@@ -117,7 +106,7 @@ class _SignupLoginSamplePageState extends State<SignupLoginSamplePage> {
                             textColor: widget.buttonType == ButtonType.login
                                 ? white
                                 : black,
-                            borderColor: loginBorderColor,
+                            borderColor: black,
                           ),
                         ),
                         Align(
@@ -142,7 +131,7 @@ class _SignupLoginSamplePageState extends State<SignupLoginSamplePage> {
                             textColor: widget.buttonType == ButtonType.login
                                 ? black
                                 : white,
-                            borderColor: loginBorderColor,
+                            borderColor: black,
                           ),
                         ),
                       ],
@@ -159,7 +148,9 @@ class _SignupLoginSamplePageState extends State<SignupLoginSamplePage> {
                 alignment: Alignment.centerRight,
                 child: widget.buttonType == ButtonType.login
                     ? CustomButtonContainer(
-                        onPressed: () {},
+                        onPressed: () {
+                          navigatePushNamedAndRemoveUntil(context, homepage);
+                        },
                         text: "Login",
                       )
                     : widget.buttonType == ButtonType.signup

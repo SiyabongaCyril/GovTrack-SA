@@ -123,10 +123,11 @@ class SignupLoginTextField extends StatelessWidget {
                 bottom: proportionalHeight(screenHeight, 13),
               ),
               hintText: hintText,
-              hintStyle: const TextStyle(
+              hintStyle: TextStyle(
                 fontSize: 16,
                 fontFamily: "Inter",
                 fontWeight: FontWeight.w300,
+                color: black.withOpacity(0.2),
               ),
             ),
           ),

@@ -41,13 +41,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               top: proportionalHeight(screenHeight, 53),
               left: proportionalWidth(screenWidth, 17),
               child: Text(
+                textAlign: TextAlign.justify,
                 "Welcome to GovTrackSA,\n"
-                "Your go to app to stay up to\ndate\n\n"
+                "Your go to app to stay up to date\n\n"
                 "Your government info\n"
-                "All In One Place!",
+                "All in one place!",
                 style: TextStyle(
                   fontSize: proportionalHeight(screenHeight, 18),
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w400,
                   color: white,
                 ),
               ),
