@@ -19,6 +19,7 @@ class _EmailSignupScreenState extends State<EmailSignupScreen> {
   // This variable is used to check if the email entered is valid
   bool isEmailValid = false;
   bool isEmailValidUponSignup = true;
+  bool showCircularProgressIndicator = false;
 
   @override
   void initState() {
@@ -36,8 +37,8 @@ class _EmailSignupScreenState extends State<EmailSignupScreen> {
     super.dispose();
   }
 
-// This function is used to check if the email entered is valid
-  void checkEMail() {
+  // This function is used to check if the email entered is valid
+  void checkEMailValidity() {
     setState(() {
       isEmailValid = EmailValidator.validate(
           AppControllers.emailEmailController.text, true, true);
@@ -47,6 +48,7 @@ class _EmailSignupScreenState extends State<EmailSignupScreen> {
     });
   }
 
+  // Check if fields are empty
   void checkEmptyFields(TextEditingController controller, String text) {
     setState(
       () {
@@ -57,6 +59,7 @@ class _EmailSignupScreenState extends State<EmailSignupScreen> {
     );
   }
 
+  // Check if email is valid when signup button is pressed
   bool checkEMailUponSignup() {
     setState(() {
       isEmailValid
@@ -66,32 +69,56 @@ class _EmailSignupScreenState extends State<EmailSignupScreen> {
     return isEmailValidUponSignup;
   }
 
+  // change the state of the circular progress indicator
+  void changeCircularProgressIndicatorState() {
+    setState(() {
+      showCircularProgressIndicator = !showCircularProgressIndicator;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SignupLoginSamplePage(
+      showCircularProgressIndicator: showCircularProgressIndicator,
       onPressed: () async {
-        // error checking
-        if (checkEMailUponSignup() == false) {
-          showSnackBar("please enter a valid email", context);
-          return;
-        }
-        if (AppControllers.emailEmailController.text.isEmpty ||
-            AppControllers.emailPasswordController.text.isEmpty ||
-            AppControllers.emailConfirmPasswordController.text.isEmpty) {
-          showSnackBar("please fill in missing details", context);
-          return;
-        } else if (AppControllers.emailPasswordController.text !=
-            AppControllers.emailConfirmPasswordController.text) {
-          showSnackBar("passwords do not match", context);
-          return;
-        } else {
-          log("Trying to register user");
-          await AppAuth.auth
-              .register(
-                email: AppControllers.emailEmailController.text,
-                password: AppControllers.emailPasswordController.text,
-              )
-              .then((value) => log("User registered successfully"));
+        try {
+// error checking
+
+          if (AppControllers.emailEmailController.text.isEmpty ||
+              AppControllers.emailPasswordController.text.isEmpty ||
+              AppControllers.emailConfirmPasswordController.text.isEmpty) {
+            showSnackBar("Please fill in all the required fields.", context);
+            return;
+          } else if (checkEMailUponSignup() == false) {
+            showSnackBar("Please enter a valid email.", context);
+            return;
+          } else if (AppControllers.emailPasswordController.text !=
+              AppControllers.emailConfirmPasswordController.text) {
+            showSnackBar("Passwords do not match.", context);
+            return;
+          } else {
+            changeCircularProgressIndicatorState();
+            log("Trying to register user");
+            await AppAuth.auth
+                .register(
+              email: AppControllers.emailEmailController.text,
+              password: AppControllers.emailPasswordController.text,
+              context: context,
+            )
+                .then(
+              (value) {
+                log("Signup successful");
+                AppControllers.setLoginTextFields(
+                    AppControllers.emailEmailController.text,
+                    AppControllers.emailPasswordController.text);
+                changeCircularProgressIndicatorState();
+                navigateAndPushNamed(context, login);
+              },
+            );
+          }
+        } catch (e) {
+          log("Signup failed");
+          changeCircularProgressIndicatorState();
         }
       },
       addMap: true,
@@ -101,7 +128,8 @@ class _EmailSignupScreenState extends State<EmailSignupScreen> {
         children: [
           // email
           SignupLoginTextField(
-              onTextFieldChanged: (checkEmailValidity) => checkEMail(),
+              keyboardType: TextInputType.emailAddress,
+              onTextFieldChanged: (checkEmailValidity) => checkEMailValidity(),
               headingText: "Email:",
               hintText: "* Enter your email",
               textFieldController: AppControllers.emailEmailController,

@@ -20,3 +20,10 @@ class GenericAuthException implements Exception {}
 //It's possible to register a user without an exception but user is null,
 //User wasn't signed in to Firebase Auth
 class UserNotLoggedInAuthException implements Exception {}
+
+// Network Exceptions
+class NetworkRequestFailedAuthException implements Exception {}
+
+class TimeoutAuthException implements Exception {}
+
+class InternalErrorAuthException implements Exception {}

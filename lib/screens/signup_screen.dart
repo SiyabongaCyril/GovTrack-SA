@@ -8,8 +8,8 @@ class SignupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double statusBarHeight = MediaQuery.of(context).padding.top;
-    double screenHeight = MediaQuery.of(context).size.height - statusBarHeight;
+    //double statusBarHeight = MediaQuery.of(context).padding.top;
+    //double screenHeight = MediaQuery.of(context).size.height - statusBarHeight;
 
     return SignupLoginSamplePage(
       onPressed: () {},
@@ -31,24 +31,24 @@ class SignupScreen extends StatelessWidget {
                   Icons.email_rounded,
                 )),
           ),
-          SizedBox(
-            height: proportionalHeight(screenHeight, 12),
-          ),
+          // SizedBox(
+          //   height: proportionalHeight(screenHeight, 12),
+          // ),
           //Phone option
-          GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(context, phonesignup);
-            },
-            child: const SignupOptionButton(
-              text: "Phone",
-              widget: Icon(
-                Icons.call_rounded,
-              ),
-            ),
-          ),
-          SizedBox(
-            height: proportionalHeight(screenHeight, 12),
-          ),
+          // GestureDetector(
+          //   onTap: () {
+          //     Navigator.pushNamed(context, phonesignup);
+          //   },
+          //   child: const SignupOptionButton(
+          //     text: "Phone",
+          //     widget: Icon(
+          //       Icons.call_rounded,
+          //     ),
+          //   ),
+          // ),
+          // SizedBox(
+          //   height: proportionalHeight(screenHeight, 12),
+          // ),
           //Other options
           // const SignupOptionButton(
           //   text: "Other Options",

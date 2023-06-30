@@ -1,3 +1,5 @@
+import 'package:gov_track_sa/screens/screen_barrel.dart';
+
 import 'auth_provider.dart';
 import 'auth_user.dart';
 import 'firebase_auth_provider.dart';
@@ -10,8 +12,11 @@ class AuthService implements AuthProvider {
 
   @override
   Future<AuthUser> register(
-      {required String email, required String password}) async {
-    return await provider.register(email: email, password: password);
+      {required String email,
+      required String password,
+      required BuildContext context}) async {
+    return await provider.register(
+        email: email, password: password, context: context);
   }
 
   @override
@@ -19,18 +24,21 @@ class AuthService implements AuthProvider {
 
   @override
   Future<AuthUser> logIn(
-      {required String email, required String password}) async {
-    return await provider.logIn(email: email, password: password);
+      {required String email,
+      required String password,
+      required BuildContext context}) async {
+    return await provider.logIn(
+        email: email, password: password, context: context);
   }
 
   @override
-  Future<void> logOut() async {
-    return await provider.logOut();
+  Future<void> logOut({required BuildContext context}) async {
+    return await provider.logOut(context: context);
   }
 
   @override
-  Future<void> sendEmailVerification() async {
-    return await provider.sendEmailVerification();
+  Future<void> sendEmailVerification({required BuildContext context}) async {
+    return await provider.sendEmailVerification(context: context);
   }
 
   @override

@@ -1,4 +1,5 @@
-import '/utilities/navigators.dart';
+import 'package:gov_track_sa/utilities/show_error_dialog.dart';
+import 'mainui_styles_widgets.dart';
 import 'status_bar_container.dart';
 import 'widget_barrel.dart';
 import '/screens/governance_screen.dart';
@@ -18,6 +19,7 @@ class MainUI extends StatefulWidget {
 
 class _MainUIState extends State<MainUI> {
   int _selectedItemIndex = 0;
+  bool _searching = false;
 
   changeSelectedItem(int index) {
     setState(() {
@@ -34,93 +36,196 @@ class _MainUIState extends State<MainUI> {
 
   @override
   Widget build(BuildContext context) {
+    double statusBarHeight = MediaQuery.of(context).padding.top;
+    double screenHeight = MediaQuery.of(context).size.height - statusBarHeight;
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return StatusBarContainer(
       color: white,
       widget: Scaffold(
-        // App Bar (Menu, Title, Search, Profile Avatar)
-        appBar: AppBar(
-          //Current Tab Title
-          title: const Text(
-            "Home",
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: black,
-            ),
-          ),
-          //Menu and Menu Items
-          leading: PopupMenuButton<MenuItems>(
-            onSelected: (value) {
-              switch (value) {
-                case MenuItems.settings:
-                  //Navigator.pushNamed(context, settings);
-                  break;
-                case MenuItems.logout:
-                  navigatePushNamedAndRemoveUntil(context, login);
-                  break;
-              }
-            },
-            icon: const Icon(
-              Icons.menu_rounded,
-              color: black,
-              size: 30,
-            ),
-            itemBuilder: (context) {
-              return [
-                // Settings
-                PopupMenuItem(
-                  value: MenuItems.settings,
-                  child: Row(
-                    children: const [
-                      Icon(Icons.settings_rounded),
-                      Text("Settings"),
-                    ],
+        // App Bar (Menu, Title, Search, Profile Avatar),
+        appBar: _searching == false
+            ? AppBar(
+                // Title: Dropdown Menu and Menu Items
+                // to select a tab: Home, Profiles, Governance, Elections
+                title: DropdownButton<int>(
+                  underline: Container(),
+                  borderRadius: BorderRadius.circular(20),
+                  icon: const Icon(
+                    Icons.arrow_drop_down_rounded,
+                    color: black,
+                    size: 30,
+                  ),
+                  value: _selectedItemIndex,
+                  onChanged: (index) {
+                    setState(() {
+                      _selectedItemIndex = index ?? _selectedItemIndex;
+                    });
+                  },
+                  items: const [
+                    DropdownMenuItem<int>(
+                      value: 0,
+                      child: Text(
+                        "Home",
+                        style: dropDownMenuTextStyle,
+                      ),
+                    ),
+                    DropdownMenuItem<int>(
+                      value: 1,
+                      child: Text(
+                        "Profiles",
+                        style: dropDownMenuTextStyle,
+                      ),
+                    ),
+                    DropdownMenuItem<int>(
+                      value: 2,
+                      child: Text(
+                        "Governance",
+                        style: dropDownMenuTextStyle,
+                      ),
+                    ),
+                    DropdownMenuItem<int>(
+                      value: 3,
+                      child: Text(
+                        "Elections",
+                        style: dropDownMenuTextStyle,
+                      ),
+                    ),
+                  ],
+                ),
+                //Menu and Menu Items
+                leading: PopupMenuButton<MenuItems>(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  onSelected: (value) async {
+                    switch (value) {
+                      case MenuItems.settings:
+                        //Navigator.pushNamed(context, settings);
+                        break;
+                      case MenuItems.logout:
+                        showErrorDialog(
+                          context,
+                          "Are you sure you want to logout?",
+                        );
+                        break;
+                    }
+                  },
+                  icon: const Icon(
+                    Icons.menu,
+                    color: black,
+                    size: 30,
+                  ),
+                  itemBuilder: (context) {
+                    return [
+                      // Settings
+                      PopupMenuItem(
+                        value: MenuItems.settings,
+                        child: Row(
+                          children: const [
+                            Icon(Icons.settings_rounded),
+                            Text(
+                              "Settings",
+                              style: dropDownMenuTextStyle,
+                            ),
+                          ],
+                        ),
+                      ),
+                      // Logout
+                      PopupMenuItem(
+                        value: MenuItems.logout,
+                        child: Row(
+                          children: const [
+                            Icon(Icons.logout_rounded),
+                            Text("Logout", style: dropDownMenuTextStyle),
+                          ],
+                        ),
+                      ),
+                    ];
+                  },
+                ),
+                backgroundColor: white,
+                actions: [
+                  //Search Icon
+                  IconButton(
+                    icon: const Icon(
+                      Icons.search_rounded,
+                      color: black,
+                      size: 30,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _searching = !_searching;
+                      });
+                    },
+                  ),
+                  //Profile Avatar
+                  Container(
+                    width: 32,
+                    height: 32,
+                    margin: const EdgeInsets.only(right: 10),
+                    child: const CircleAvatar(
+                      backgroundColor: navyBlue,
+                      //backgroundImage: AssetImage("assets/images/profile.jpg")
+                      child: Text(
+                        "C",
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontFamily: "Inter",
+                            fontWeight: FontWeight.normal,
+                            color: white),
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            : AppBar(
+                leadingWidth: proportionalWidth(screenWidth, 30),
+                leading: IconButton(
+                  icon: const Icon(
+                    Icons.arrow_back_rounded,
+                    color: black,
+                    size: 25,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _searching = !_searching;
+                    });
+                  },
+                ),
+                // Search Bar
+                title: SizedBox(
+                  height: proportionalHeight(screenHeight, 40),
+                  width: proportionalWidth(screenWidth, 330),
+                  child: TextField(
+                    keyboardType: TextInputType.text,
+                    textInputAction: TextInputAction.search,
+                    style: dropDownMenuTextStyle,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(
+                        left: proportionalWidth(screenWidth, 0),
+                        right: proportionalWidth(screenWidth, 10),
+                        bottom: proportionalHeight(screenHeight, 2),
+                      ),
+                      border: searchBarBorder,
+                      enabledBorder: searchBarBorder,
+                      focusedBorder: searchBarBorder,
+                      hintText: "Search",
+                      hintStyle: dropDownMenuTextStyle,
+                      prefixIcon: IconButton(
+                        icon: const Icon(
+                          Icons.search_rounded,
+                          color: black,
+                          size: 20,
+                        ),
+                        onPressed: () {},
+                      ),
+                    ),
                   ),
                 ),
-                // Logout
-                PopupMenuItem(
-                  value: MenuItems.logout,
-                  child: Row(
-                    children: const [
-                      Icon(Icons.logout_rounded),
-                      Text("Logout"),
-                    ],
-                  ),
-                ),
-              ];
-            },
-          ),
-          backgroundColor: white,
-          actions: [
-            //Search Icon
-            IconButton(
-              icon: const Icon(
-                Icons.search_rounded,
-                color: black,
-                size: 30,
+                backgroundColor: white,
               ),
-              onPressed: () {},
-            ),
-            //Profile Avatar
-            Container(
-              width: 35,
-              height: 35,
-              margin: const EdgeInsets.only(right: 10),
-              child: const CircleAvatar(
-                backgroundColor: navyBlue,
-                //backgroundImage: AssetImage("assets/images/profile.jpg")
-                child: Text(
-                  "C",
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontFamily: "Inter",
-                      fontWeight: FontWeight.bold,
-                      color: white),
-                ),
-              ),
-            ),
-          ],
-        ),
+
         // Bottom Navigation Bar (Home, Profiles, Governance, Politics)
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _selectedItemIndex,

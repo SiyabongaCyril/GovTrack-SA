@@ -22,4 +22,21 @@ class AppControllers {
       TextEditingController();
   static TextEditingController loginPasswordController =
       TextEditingController();
+
+// Properties and methods to assist with
+// saving the registration information upon signup
+// and navigating to the login screen
+
+  static String _loginUsername = "";
+  static String _loginPassword = "";
+
+  static void setLoginTextFields(String username, String password) {
+    _loginUsername = username;
+    _loginPassword = password;
+  }
+
+  static void getLoginTextFields() {
+    AppControllers.loginUsernameController.text = _loginUsername;
+    AppControllers.loginPasswordController.text = _loginPassword;
+  }
 }

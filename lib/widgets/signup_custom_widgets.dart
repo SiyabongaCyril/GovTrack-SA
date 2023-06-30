@@ -92,6 +92,7 @@ class SignupLoginTextField extends StatelessWidget {
   final String errorText;
   final Widget? suffixWidget;
   final Function(String)? onTextFieldChanged;
+  final TextInputType? keyboardType;
 
   final TextEditingController textFieldController;
   const SignupLoginTextField({
@@ -102,6 +103,7 @@ class SignupLoginTextField extends StatelessWidget {
     this.errorText = "",
     this.suffixWidget,
     this.onTextFieldChanged,
+    this.keyboardType,
   });
 
   @override
@@ -128,6 +130,7 @@ class SignupLoginTextField extends StatelessWidget {
         // Bordered Text Field
         SignupFieldContainer(
           widget: TextField(
+            keyboardType: keyboardType,
             onChanged: onTextFieldChanged,
             controller: textFieldController,
             style: const TextStyle(

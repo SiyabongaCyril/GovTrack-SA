@@ -35,25 +35,23 @@ class CustomButtonContainer extends StatelessWidget {
           color: borderColor,
         ),
       ),
-      child: Expanded(
-        child: Center(
-          child: ElevatedButton(
-            style: const ButtonStyle(
-              shadowColor: MaterialStatePropertyAll(
-                Colors.transparent,
-              ),
-              backgroundColor: MaterialStatePropertyAll(
-                Colors.transparent,
-              ),
+      child: Center(
+        child: ElevatedButton(
+          style: const ButtonStyle(
+            shadowColor: MaterialStatePropertyAll(
+              Colors.transparent,
             ),
-            onPressed: onPressed,
-            child: Text(
-              text,
-              style: TextStyle(
-                color: textColor,
-                fontSize: proportionalHeight(screenHeight, 14),
-                fontWeight: FontWeight.w400,
-              ),
+            backgroundColor: MaterialStatePropertyAll(
+              Colors.transparent,
+            ),
+          ),
+          onPressed: onPressed,
+          child: Text(
+            text,
+            style: TextStyle(
+              color: textColor,
+              fontSize: proportionalHeight(screenHeight, 14),
+              fontWeight: FontWeight.w400,
             ),
           ),
         ),

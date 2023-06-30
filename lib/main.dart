@@ -10,9 +10,9 @@ import 'screens/login_screen.dart';
 import 'screens/welcome_screen.dart';
 import 'widgets/main_ui.dart';
 
-void main() {
-  WidgetsFlutterBinding.ensureInitialized;
-  AppAuth.auth.initialise;
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await AppAuth.auth.initialise();
   runApp(const MyApp());
 }
 
@@ -27,12 +27,14 @@ class MyApp extends StatelessWidget {
       title: "GovTrackSA",
       // Remove color from status bar
       // Set the app's first route (Welcome Screen)
-      home: const AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle(
+      home: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: const SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
           statusBarIconBrightness: Brightness.dark,
         ),
-        child: WelcomeScreen(),
+        child: AppAuth.auth.currentUser != null
+            ? const MainUI()
+            : const WelcomeScreen(),
       ), // Set the home screen to WelcomeScreen
       // App theme
       theme: ThemeData(

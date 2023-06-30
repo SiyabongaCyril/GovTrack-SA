@@ -1,7 +1,6 @@
 //THE APP'S DEFITION OF USER AUTHENTICATION
 
-import 'package:gov_track_sa/screens/screen_barrel.dart';
-import 'package:gov_track_sa/utilities/show_snack_bar.dart';
+import 'package:gov_track_sa/widgets/widget_barrel.dart';
 
 import 'auth_user.dart';
 
@@ -11,16 +10,14 @@ abstract class AuthProvider {
   Future<void> initialise();
 
   AuthUser? get currentUser;
-  Future<AuthUser> logIn({required String email, required String password});
-  Future<AuthUser> register({required String email, required String password});
-  Future<void> logOut();
-  Future<void> sendEmailVerification();
+  Future<AuthUser> logIn(
+      {required String email,
+      required String password,
+      required BuildContext context});
+  Future<AuthUser> register(
+      {required String email,
+      required String password,
+      required BuildContext context});
+  Future<void> logOut({required BuildContext context});
+  Future<void> sendEmailVerification({required BuildContext context});
 }
-
-// extension AuthProviderErrorHandlingExtension on AuthProvider {
-//   void registerAndHandleErrors({required String email, required String password, required context, String text = "Please enter valid details"}) {
-//     register(email: email, password: password);
-//     showSnackBar(text, context);
-//     };
-// }
-

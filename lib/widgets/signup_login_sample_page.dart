@@ -9,6 +9,7 @@ class SignupLoginSamplePage extends StatefulWidget {
   final ButtonType buttonType;
   final bool addMap;
   final void Function() onPressed;
+  final bool showCircularProgressIndicator;
 
   const SignupLoginSamplePage({
     super.key,
@@ -16,6 +17,7 @@ class SignupLoginSamplePage extends StatefulWidget {
     this.buttonType = ButtonType.none,
     this.addMap = true,
     required this.onPressed,
+    this.showCircularProgressIndicator = false,
   });
 
   @override
@@ -160,21 +162,38 @@ class _SignupLoginSamplePageState extends State<SignupLoginSamplePage> {
                   height: proportionalHeight(screenHeight, 13),
                 ),
                 // Optional Login or Signup bottom button
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: widget.buttonType == ButtonType.login
-                      ? CustomButtonContainer(
-                          onPressed: () {
-                            navigatePushNamedAndRemoveUntil(context, mainui);
-                          },
-                          text: "Login",
-                        )
-                      : widget.buttonType == ButtonType.signup
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    //circular progress indicator
+                    widget.showCircularProgressIndicator
+                        ? SizedBox(
+                            width: proportionalWidth(screenWidth, 20),
+                            height: proportionalHeight(screenHeight, 20),
+                            child: CircularProgressIndicator(
+                              strokeWidth: proportionalWidth(screenWidth, 2),
+                              color: navyBlue,
+                            ),
+                          )
+                        : const SizedBox(),
+                    SizedBox(
+                      width: proportionalWidth(screenWidth, 10),
+                    ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: widget.buttonType == ButtonType.login
                           ? CustomButtonContainer(
                               onPressed: widget.onPressed,
-                              text: "Sign up",
+                              text: "Login",
                             )
-                          : const SizedBox(),
+                          : widget.buttonType == ButtonType.signup
+                              ? CustomButtonContainer(
+                                  onPressed: widget.onPressed,
+                                  text: "Sign up",
+                                )
+                              : const SizedBox(),
+                    ),
+                  ],
                 )
               ],
             ),
