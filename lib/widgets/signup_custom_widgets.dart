@@ -4,8 +4,12 @@ import 'widget_barrel.dart';
 // fields: password textfield, signup-options Field, email&phone number fields
 class SignupFieldContainer extends StatelessWidget {
   final Color containerColor;
-  const SignupFieldContainer(
-      {super.key, required this.widget, this.containerColor = white});
+
+  const SignupFieldContainer({
+    super.key,
+    required this.widget,
+    this.containerColor = white,
+  });
   final Widget widget;
 
   @override
@@ -17,12 +21,12 @@ class SignupFieldContainer extends StatelessWidget {
     return Center(
       child: Container(
         padding: EdgeInsets.only(
-          left: proportionalWidth(screenWidth, 20),
-          right: proportionalWidth(screenWidth, 20),
+          left: proportionalWidth(screenWidth, 15),
+          right: proportionalWidth(screenWidth, 5),
           top: proportionalHeight(screenHeight, 10),
           bottom: proportionalHeight(screenHeight, 10),
         ),
-        alignment: Alignment.centerLeft,
+        alignment: Alignment.topCenter,
         width: proportionalWidth(screenWidth, 287),
         height: proportionalHeight(screenHeight, 50),
         decoration: BoxDecoration(
@@ -85,8 +89,20 @@ class SignupOptionButton extends StatelessWidget {
 class SignupLoginTextField extends StatelessWidget {
   final String headingText;
   final String hintText;
-  const SignupLoginTextField(
-      {super.key, this.hintText = "", required this.headingText});
+  final String errorText;
+  final Widget? suffixWidget;
+  final Function(String)? onTextFieldChanged;
+
+  final TextEditingController textFieldController;
+  const SignupLoginTextField({
+    super.key,
+    this.hintText = "",
+    required this.headingText,
+    required this.textFieldController,
+    this.errorText = "",
+    this.suffixWidget,
+    this.onTextFieldChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -94,6 +110,7 @@ class SignupLoginTextField extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height - statusBarHeight;
     return Column(
       children: [
+        // Text Field Heading
         Align(
           alignment: Alignment.centerLeft,
           child: Text(
@@ -108,8 +125,11 @@ class SignupLoginTextField extends StatelessWidget {
         SizedBox(
           height: proportionalHeight(screenHeight, 7),
         ),
+        // Bordered Text Field
         SignupFieldContainer(
           widget: TextField(
+            onChanged: onTextFieldChanged,
+            controller: textFieldController,
             style: const TextStyle(
               fontSize: 16,
               fontFamily: "Inter",
@@ -118,13 +138,15 @@ class SignupLoginTextField extends StatelessWidget {
             ),
             textAlign: TextAlign.justify,
             decoration: InputDecoration(
+              suffixIcon: suffixWidget,
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(
                 bottom: proportionalHeight(screenHeight, 13),
               ),
               hintText: hintText,
               hintStyle: TextStyle(
-                fontSize: 16,
+                fontSize: 15,
+                fontStyle: FontStyle.italic,
                 fontFamily: "Inter",
                 fontWeight: FontWeight.w300,
                 color: black.withOpacity(0.2),
@@ -132,9 +154,23 @@ class SignupLoginTextField extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
-          height: proportionalHeight(screenHeight, 12),
-        )
+        //Text showing error in textfield
+        Padding(
+          padding: EdgeInsets.only(
+            right: proportionalWidth(screenHeight, 5),
+          ),
+          child: Align(
+            alignment: Alignment.topRight,
+            child: Text(
+              errorText,
+              style: const TextStyle(
+                color: navyBlue,
+                fontStyle: FontStyle.italic,
+                fontSize: 10,
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }

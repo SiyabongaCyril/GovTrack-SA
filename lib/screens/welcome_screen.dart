@@ -30,7 +30,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         body: Stack(
           alignment: Alignment.center,
           children: [
-            //The top clipped container
+            //The container
             Container(
               width: screenWidth,
               height: screenHeight,
@@ -64,6 +64,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ),
             ),
             //The bottom clipped container & its contents
+            //(Page navigation circles & navigation pages)
             ClipPath(
               clipper: WelcomeBottomClipper(screenWidth, screenHeight),
               //Page view for all the application description pages
@@ -76,6 +77,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   });
                 },
                 scrollDirection: Axis.horizontal,
+                //Navigation pages
                 children: [
                   for (var i = 0; i < 4; i++)
                     AppWalkthrough(appDescriptionIndex: i),
@@ -96,6 +98,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     SizedBox(
                       width: proportionalWidth(screenWidth, 13),
                     ),
+                    //Page navigation circles
                     for (var i = 0; i < 4; i++)
                       WalkthroughPageCircle(
                           circleColor: pageNum == i
@@ -106,6 +109,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ),
             ),
             showButton
+                //render the get started button on the last page
                 ? Align(
                     alignment: Alignment.bottomRight,
                     child: Padding(

@@ -2,13 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gov_track_sa/screens/phone_number_signin_screen.dart';
 import 'package:gov_track_sa/screens/signup_screen.dart';
+//import 'package:gov_track_sa/screens/test_screen.dart';
+import 'package:gov_track_sa/services/auth/govtracksa_auth.dart';
 import 'package:gov_track_sa/utilities/navigators.dart';
-import 'screens/gmail_signup_screen.dart';
+import 'screens/email_signup_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/welcome_screen.dart';
-import 'screens/home_screen.dart';
+import 'widgets/main_ui.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized;
+  AppAuth.auth.initialise;
   runApp(const MyApp());
 }
 
@@ -19,8 +23,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      //remove shadows from status bar
       debugShowCheckedModeBanner: false,
+      title: "GovTrackSA",
+      // Remove color from status bar
+      // Set the app's first route (Welcome Screen)
       home: const AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
@@ -28,16 +34,17 @@ class MyApp extends StatelessWidget {
         ),
         child: WelcomeScreen(),
       ), // Set the home screen to WelcomeScreen
+      // App theme
       theme: ThemeData(
         fontFamily: "Montserrat", // Set the default font family
       ),
+      // Define the app's named routes
       routes: {
-        // Define app's named routes
         signup: (context) => const SignupScreen(),
-        gmailsignup: (context) => const GmailSignupScreen(),
+        emailsignup: (context) => const EmailSignupScreen(),
         login: (context) => const LoginScreen(),
         phonesignup: (context) => const PhoneSignupScreen(),
-        homepage: (context) => const HomeScreen(),
+        mainui: (context) => const MainUI(),
       },
     );
   }

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "33955444768",
+    "project_id": "govtracksa",
+    "storage_bucket": "govtracksa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:33955444768:android:bff02d9770276ea1dc6445",
+        "android_client_info": {
+          "package_name": "com.example.gov_track_sa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "33955444768-befb3c7o5ea9um2usesgh7qdprlkvpk2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxthscPtmP3OflPktk_KXXWMgXrBJpjvc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "33955444768-befb3c7o5ea9um2usesgh7qdprlkvpk2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
