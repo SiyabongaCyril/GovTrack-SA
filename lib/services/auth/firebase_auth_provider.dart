@@ -162,4 +162,43 @@ class FirebaseAuthProvider implements AuthProvider {
     await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform);
   }
+
+  @override
+  Future<void> sendPasswordResetEmail({
+    required BuildContext context,
+    required String email,
+  }) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      switch (e.code) {
+        case 'invalid-email':
+          showSnackBar("Please enter a valid email.", context);
+          throw InvalidEmailAuthException();
+        case 'user-not-found':
+          showSnackBar("User not found, please enter a valid email", context);
+          throw InvalidEmailAuthException();
+        case 'network-request-failed':
+          showSnackBar(
+              "Network request failed. Please check your internet connection.",
+              context);
+          throw NetworkRequestFailedAuthException();
+        case 'timeout':
+          showSnackBar("Request timed out. Please try again later.", context);
+          throw TimeoutAuthException();
+        case 'internal-error':
+          showSnackBar(
+              "Internal error occurred. Please try again later.", context);
+          throw InternalErrorAuthException();
+        default:
+          log("Firebase Generic Auth Exception: $e.toString()");
+          showSnackBar("An error occurred. Please try again.", context);
+          throw GenericAuthException();
+      }
+    } catch (e) {
+      log("Generic Auth Exception: $e.toString()");
+      showSnackBar("An error occurred. Please try again.", context);
+      throw GenericAuthException();
+    }
+  }
 }

@@ -23,6 +23,10 @@ class AppControllers {
   static TextEditingController loginPasswordController =
       TextEditingController();
 
+  // forgotPassword controller
+  static TextEditingController forgotPasswordController =
+      TextEditingController();
+
   // Search bar controller
   static TextEditingController searchBarController = TextEditingController();
 

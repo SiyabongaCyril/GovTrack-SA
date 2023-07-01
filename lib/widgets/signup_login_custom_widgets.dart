@@ -147,7 +147,7 @@ class SignupLoginTextField extends StatelessWidget {
               suffixIcon: suffixWidget,
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(
-                bottom: proportionalHeight(screenHeight, 13),
+                bottom: proportionalHeight(screenHeight, 12),
               ),
               hintText: hintText,
               hintStyle: TextStyle(

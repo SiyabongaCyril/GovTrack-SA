@@ -1,8 +1,8 @@
 import 'dart:developer';
-
 import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gov_track_sa/services/auth/govtracksa_auth.dart';
-import 'package:gov_track_sa/widgets/signup_custom_widgets.dart';
+import 'package:gov_track_sa/widgets/signup_login_custom_widgets.dart';
 import 'package:gov_track_sa/widgets/signup_login_sample_page.dart';
 import '../utilities/controllers.dart';
 import '../utilities/show_snack_bar.dart';
@@ -20,6 +20,7 @@ class _LoginScreenState extends State<LoginScreen> {
   bool isEmailValid = false;
   bool isEmailValidUponLogin = true;
   bool showCircularProgressIndicator = false;
+  bool isEmailVerificationSent = false;
 
   @override
   void initState() {
@@ -82,16 +83,18 @@ class _LoginScreenState extends State<LoginScreen> {
     return SignupLoginSamplePage(
       showCircularProgressIndicator: showCircularProgressIndicator,
       onPressed: () async {
+        //isEmailVerificationSent = false;
+        final user = FirebaseAuth.instance.currentUser;
+        log("$user");
         try {
           // error checking
 
-          if (checkEMailUponLogin() == false) {
-            showSnackBar("Please enter a valid email.", context);
-            return;
-          }
           if (AppControllers.loginUsernameController.text.isEmpty ||
               AppControllers.loginPasswordController.text.isEmpty) {
             showSnackBar("Please fill in all the required fields.", context);
+            return;
+          } else if (checkEMailUponLogin() == false) {
+            showSnackBar("Please enter a valid email.", context);
             return;
           } else {
             changeCircularProgressIndicatorState();
@@ -102,22 +105,67 @@ class _LoginScreenState extends State<LoginScreen> {
               password: AppControllers.loginPasswordController.text,
               context: context,
             )
-                .then((value) {
+                .then((value) async {
               log("Login successful");
-              changeCircularProgressIndicatorState();
-              navigatePushNamedAndRemoveUntil(context, mainui);
+              showCircularProgressIndicator == true
+                  ? changeCircularProgressIndicatorState()
+                  : null;
+
+              if (AppAuth.auth.currentUser?.isEmailVerified == true) {
+                navigatePushNamedAndRemoveUntil(context, mainui);
+              } else {
+                await AppAuth.auth.sendEmailVerification(context: context).then(
+                  (value) async {
+                    await AppAuth.auth.logOut(context: context).then(
+                          (value) => showCircularProgressIndicator == true
+                              ? changeCircularProgressIndicatorState()
+                              : null,
+                        );
+                    setState(() {
+                      isEmailVerificationSent = true;
+                    });
+                  },
+                );
+              }
             });
           }
         } catch (e) {
+          await AppAuth.auth.logOut(context: context);
           log("Login failed");
-          changeCircularProgressIndicatorState();
+
+          showCircularProgressIndicator == true
+              ? changeCircularProgressIndicatorState()
+              : null;
         }
       },
       buttonType: ButtonType.login,
       childWidget: Column(
         mainAxisAlignment: MainAxisAlignment.start,
+
         // Define Login text fields
         children: [
+          // if email verification is sent show text
+          if (isEmailVerificationSent == true)
+            Column(
+              children: const [
+                Text(
+                  textAlign: TextAlign.justify,
+                  "You need to verify your email before logging in."
+                  " An email verification link has been sent to your inbox."
+                  " Please check your email, follow the instructions and"
+                  " try again.",
+                  style: TextStyle(
+                    color: orange,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w300,
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+              ],
+            ),
+
           // Username
           SignupLoginTextField(
             // keyboardType: TextInputType.emailAddress,
@@ -133,11 +181,29 @@ class _LoginScreenState extends State<LoginScreen> {
                   )
                 : null,
           ),
+
           // Password
           SignupLoginTextField(
             hintText: "Enter your password",
             headingText: "Password:",
             textFieldController: AppControllers.loginPasswordController,
+          ),
+
+          // Forgot password
+          Align(
+            alignment: Alignment.centerRight,
+            child: TextButton(
+              child: const Text(
+                "Forgot password?",
+                style: TextStyle(
+                    color: navyBlue,
+                    fontStyle: FontStyle.italic,
+                    fontWeight: FontWeight.normal),
+              ),
+              onPressed: () {
+                navigateAndPushNamed(context, forgotpassword);
+              },
+            ),
           ),
         ],
       ),

@@ -20,4 +20,6 @@ abstract class AuthProvider {
       required BuildContext context});
   Future<void> logOut({required BuildContext context});
   Future<void> sendEmailVerification({required BuildContext context});
+  Future<void> sendPasswordResetEmail(
+      {required BuildContext context, required String email});
 }

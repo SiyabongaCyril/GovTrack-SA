@@ -9,6 +9,7 @@ const welcome = "/welcome";
 const phonesignup = "/phonesignup";
 const homepage = "/homepage";
 const mainui = "/mainui";
+const forgotpassword = "/forgotpassword";
 
 // Methods for navigation
 

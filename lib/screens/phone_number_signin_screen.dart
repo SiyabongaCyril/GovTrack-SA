@@ -1,5 +1,5 @@
 import '../utilities/controllers.dart';
-import '/widgets/signup_custom_widgets.dart';
+import '../widgets/signup_login_custom_widgets.dart';
 import '/widgets/signup_login_sample_page.dart';
 import 'screen_barrel.dart';
 

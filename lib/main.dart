@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gov_track_sa/constants/app_colors.dart';
+import 'package:gov_track_sa/screens/forgot_password_screen.dart';
 import 'package:gov_track_sa/screens/phone_number_signin_screen.dart';
 import 'package:gov_track_sa/screens/signup_screen.dart';
 //import 'package:gov_track_sa/screens/test_screen.dart';
@@ -51,6 +52,7 @@ class MyApp extends StatelessWidget {
         login: (context) => const LoginScreen(),
         phonesignup: (context) => const PhoneSignupScreen(),
         mainui: (context) => const MainUI(),
+        forgotpassword: (context) => const ForgotPasswordScreen(),
       },
     );
   }

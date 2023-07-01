@@ -1,7 +1,7 @@
 //import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gov_track_sa/widgets/signup_login_sample_page.dart';
 import 'screen_barrel.dart';
-import '/widgets/signup_custom_widgets.dart';
+import '../widgets/signup_login_custom_widgets.dart';
 
 // Tracks the last signup screen visited inorder to return to it from login screen
 String lastSignUpScreen = signup;

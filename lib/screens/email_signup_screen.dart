@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:gov_track_sa/services/auth/govtracksa_auth.dart';
 import 'package:gov_track_sa/utilities/show_snack_bar.dart';
-import 'package:gov_track_sa/widgets/signup_custom_widgets.dart';
+import 'package:gov_track_sa/widgets/signup_login_custom_widgets.dart';
 import 'package:gov_track_sa/widgets/signup_login_sample_page.dart';
 import '../utilities/controllers.dart';
 import 'screen_barrel.dart';
