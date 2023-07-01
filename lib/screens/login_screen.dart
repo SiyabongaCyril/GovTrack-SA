@@ -122,13 +122,14 @@ class _LoginScreenState extends State<LoginScreen> {
           SignupLoginTextField(
             // keyboardType: TextInputType.emailAddress,
             onTextFieldChanged: (checkEmailValidity) => checkEMailValidity(),
-            hintText: "Enter your username",
-            headingText: "Username (phone or email):",
+            hintText: "Enter your username (phone or email)",
+            headingText: "Username:",
             textFieldController: AppControllers.loginUsernameController,
             suffixWidget: isEmailValid
                 ? const Icon(
-                    Icons.check_circle,
+                    Icons.check_circle_outline_outlined,
                     color: orange,
+                    size: 18,
                   )
                 : null,
           ),

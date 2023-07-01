@@ -23,6 +23,9 @@ class AppControllers {
   static TextEditingController loginPasswordController =
       TextEditingController();
 
+  // Search bar controller
+  static TextEditingController searchBarController = TextEditingController();
+
 // Properties and methods to assist with
 // saving the registration information upon signup
 // and navigating to the login screen

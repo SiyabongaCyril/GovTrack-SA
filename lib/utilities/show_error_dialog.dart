@@ -15,10 +15,27 @@ Future<void> showErrorDialog(BuildContext context, String text) {
     context: context,
     builder: (context) {
       return AlertDialog(
+        actionsPadding: const EdgeInsets.all(20),
+        title: const Text(
+          "Logout",
+          style: TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        shape: ShapeBorder.lerp(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          1,
+        ),
         content: Text(
           text,
           style: const TextStyle(
-            fontSize: 17,
+            fontSize: 14,
             fontWeight: FontWeight.w300,
           ),
         ),
@@ -27,7 +44,7 @@ Future<void> showErrorDialog(BuildContext context, String text) {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SizedBox(
-                width: proportionalWidth(deviceWidth, 100),
+                width: proportionalWidth(deviceWidth, 70),
                 height: proportionalHeight(deviceHeight, 25),
                 child: CustomButtonContainer(
                   text: "No",
@@ -38,7 +55,7 @@ Future<void> showErrorDialog(BuildContext context, String text) {
                 ),
               ),
               SizedBox(
-                width: proportionalWidth(deviceWidth, 100),
+                width: proportionalWidth(deviceWidth, 70),
                 height: proportionalHeight(deviceHeight, 25),
                 child: CustomButtonContainer(
                   text: "Yes",

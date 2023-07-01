@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gov_track_sa/constants/app_colors.dart';
 import 'package:gov_track_sa/screens/phone_number_signin_screen.dart';
 import 'package:gov_track_sa/screens/signup_screen.dart';
 //import 'package:gov_track_sa/screens/test_screen.dart';
@@ -22,6 +23,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Set the app's orientation to portrait only
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "GovTrackSA",
@@ -29,7 +33,7 @@ class MyApp extends StatelessWidget {
       // Set the app's first route (Welcome Screen)
       home: AnnotatedRegion<SystemUiOverlayStyle>(
         value: const SystemUiOverlayStyle(
-          statusBarColor: Colors.transparent,
+          statusBarColor: transparent,
           statusBarIconBrightness: Brightness.dark,
         ),
         child: AppAuth.auth.currentUser != null
@@ -37,9 +41,9 @@ class MyApp extends StatelessWidget {
             : const WelcomeScreen(),
       ), // Set the home screen to WelcomeScreen
       // App theme
-      theme: ThemeData(
-        fontFamily: "Montserrat", // Set the default font family
-      ),
+      // theme: ThemeData(
+      //fontFamily: "Montserrat", // Set the default font family
+      //     ),
       // Define the app's named routes
       routes: {
         signup: (context) => const SignupScreen(),

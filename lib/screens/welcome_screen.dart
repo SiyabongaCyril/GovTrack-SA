@@ -39,7 +39,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             //Welcome Text, render on top of the top clipped container
             Positioned(
               top: proportionalHeight(screenHeight, 53),
-              left: proportionalWidth(screenWidth, 17),
+              left: proportionalWidth(screenWidth, 20),
               child: Text(
                 textAlign: TextAlign.justify,
                 "Welcome to GovTrackSA,\n"
@@ -47,20 +47,20 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 "Your government info\n"
                 "All in one place!",
                 style: TextStyle(
-                  fontSize: proportionalHeight(screenHeight, 18),
-                  fontWeight: FontWeight.w400,
+                  fontSize: proportionalHeight(screenHeight, 15),
+                  fontWeight: FontWeight.w300,
                   color: white,
                 ),
               ),
             ),
             //image rendered on top of the top clipped container
             Positioned(
-              left: proportionalWidth(screenWidth, 0),
-              top: proportionalHeight(screenHeight, 200),
+              left: proportionalWidth(screenWidth, 100),
+              top: proportionalHeight(screenHeight, 180),
               child: SvgPicture.asset(
                 "assets/images/Person-Information_Icon.svg",
-                width: proportionalWidth(screenWidth, 210),
-                height: proportionalHeight(screenHeight, 210),
+                width: proportionalWidth(screenWidth, 150),
+                height: proportionalHeight(screenHeight, 150),
               ),
             ),
             //The bottom clipped container & its contents
@@ -120,6 +120,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           CustomButtonContainer(
+                            addButtonShadow: true,
                             text: "Get started",
                             onPressed: () =>
                                 navigateAndPushNamed(context, signup),

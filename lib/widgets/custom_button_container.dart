@@ -8,14 +8,17 @@ class CustomButtonContainer extends StatelessWidget {
   final String text;
   final Color borderColor;
   final void Function() onPressed;
+  final bool addButtonShadow;
 
-  const CustomButtonContainer(
-      {super.key,
-      this.color = navyBlue,
-      required this.text,
-      this.textColor = white,
-      this.borderColor = navyBlue,
-      required this.onPressed});
+  const CustomButtonContainer({
+    super.key,
+    this.color = navyBlue,
+    required this.text,
+    this.textColor = white,
+    this.borderColor = navyBlue,
+    required this.onPressed,
+    this.addButtonShadow = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,34 +27,43 @@ class CustomButtonContainer extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Container(
-      width: proportionalWidth(screenWidth, 131),
-      height: proportionalHeight(screenHeight, 33),
+      width: proportionalWidth(screenWidth, 120),
+      height: proportionalHeight(screenHeight, 25),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(
           Radius.circular(50),
         ),
         color: color,
+        boxShadow: [
+          addButtonShadow
+              ? const BoxShadow(
+                  color: black,
+                  offset: Offset(-2, 3),
+                  blurRadius: 1,
+                )
+              : const BoxShadow(
+                  color: transparent,
+                  offset: Offset(0, 0),
+                  blurRadius: 0,
+                )
+        ],
         border: Border.all(
           color: borderColor,
         ),
       ),
       child: Center(
         child: ElevatedButton(
-          style: const ButtonStyle(
-            shadowColor: MaterialStatePropertyAll(
-              Colors.transparent,
-            ),
-            backgroundColor: MaterialStatePropertyAll(
-              Colors.transparent,
-            ),
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(transparent),
+            shadowColor: MaterialStateProperty.all(transparent),
           ),
           onPressed: onPressed,
           child: Text(
             text,
             style: TextStyle(
               color: textColor,
-              fontSize: proportionalHeight(screenHeight, 14),
-              fontWeight: FontWeight.w400,
+              fontSize: proportionalHeight(screenHeight, 13),
+              fontWeight: FontWeight.w300,
             ),
           ),
         ),

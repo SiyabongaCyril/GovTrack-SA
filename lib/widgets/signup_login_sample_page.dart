@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:gov_track_sa/screens/screen_barrel.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gov_track_sa/screens/signup_screen.dart';
 
 enum ButtonType { login, signup, none }
 
@@ -32,7 +33,7 @@ class _SignupLoginSamplePageState extends State<SignupLoginSamplePage> {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return StatusBarContainer(
-      color: Colors.white,
+      color: white,
       widget: Scaffold(
         //resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(
@@ -52,7 +53,7 @@ class _SignupLoginSamplePageState extends State<SignupLoginSamplePage> {
                   "Empowering Citizens,\nTracking Progress",
                   textAlign: TextAlign.end,
                   style: TextStyle(
-                    fontSize: proportionalHeight(screenHeight, 18),
+                    fontSize: proportionalHeight(screenHeight, 16),
                     fontWeight: FontWeight.bold,
                     color: black,
                   ),
@@ -65,16 +66,16 @@ class _SignupLoginSamplePageState extends State<SignupLoginSamplePage> {
                           children: [
                             SvgPicture.asset(
                               "assets/images/South African Map.svg",
-                              width: proportionalWidth(screenWidth, 150),
-                              height: proportionalHeight(screenHeight, 150),
+                              width: proportionalWidth(screenWidth, 140),
+                              height: proportionalHeight(screenHeight, 140),
                             ),
                             Positioned(
                               left: proportionalWidth(screenWidth, 28),
                               top: proportionalHeight(screenHeight, 120),
                               child: SvgPicture.asset(
                                 "assets/images/South African Flag.svg",
-                                width: proportionalWidth(screenWidth, 20),
-                                height: proportionalHeight(screenHeight, 20),
+                                width: proportionalWidth(screenWidth, 12),
+                                height: proportionalHeight(screenHeight, 12),
                               ),
                             )
                           ],
@@ -82,7 +83,7 @@ class _SignupLoginSamplePageState extends State<SignupLoginSamplePage> {
                       )
                     : const SizedBox(),
                 SizedBox(
-                  height: proportionalHeight(screenHeight, 30),
+                  height: proportionalHeight(screenHeight, 80),
                 ),
                 // Login or Signup option buttons
                 Align(
@@ -132,7 +133,8 @@ class _SignupLoginSamplePageState extends State<SignupLoginSamplePage> {
                                 if (isSignupRoute) {
                                   return;
                                 } else {
-                                  navigateToRouteAndPop(context, signup, login);
+                                  navigateToRouteAndPop(
+                                      context, lastSignUpScreen, login);
                                 }
                               },
                               text: "Sign-up",
@@ -183,11 +185,13 @@ class _SignupLoginSamplePageState extends State<SignupLoginSamplePage> {
                       alignment: Alignment.centerRight,
                       child: widget.buttonType == ButtonType.login
                           ? CustomButtonContainer(
+                              addButtonShadow: true,
                               onPressed: widget.onPressed,
                               text: "Login",
                             )
                           : widget.buttonType == ButtonType.signup
                               ? CustomButtonContainer(
+                                  addButtonShadow: true,
                                   onPressed: widget.onPressed,
                                   text: "Sign up",
                                 )

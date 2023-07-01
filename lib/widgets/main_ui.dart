@@ -1,4 +1,8 @@
+import 'dart:developer';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gov_track_sa/utilities/show_error_dialog.dart';
+import '../utilities/controllers.dart';
 import 'mainui_styles_widgets.dart';
 import 'status_bar_container.dart';
 import 'widget_barrel.dart';
@@ -40,15 +44,69 @@ class _MainUIState extends State<MainUI> {
     double screenHeight = MediaQuery.of(context).size.height - statusBarHeight;
     double screenWidth = MediaQuery.of(context).size.width;
 
+    String getEmailFirstLetter() {
+      // Update this to be a method in auth helper auth service
+      // It's not good practice calling Firebase in the UI
+      final user = FirebaseAuth.instance.currentUser;
+      log("${user ?? "No User"}");
+      return user!.email.toString()[0].toUpperCase();
+    }
+
     return StatusBarContainer(
       color: white,
       widget: Scaffold(
-        // App Bar (Menu, Title, Search, Profile Avatar),
         appBar: _searching == false
+            // App Bar (Menu, Title, Search, Profile Avatar),
             ? AppBar(
+                backgroundColor: white,
+                //Menu and Menu Items
+                leading: PopupMenuButton<MenuItems>(
+                  position: PopupMenuPosition.over,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  onSelected: (value) async {
+                    switch (value) {
+                      case MenuItems.settings:
+                        //Navigator.pushNamed(context, settings);
+                        break;
+                      case MenuItems.logout:
+                        showErrorDialog(
+                          context,
+                          "Are you sure you want to logout?",
+                        );
+                        break;
+                    }
+                  },
+                  // Menu Icon
+                  icon: Icon(
+                    Icons.menu,
+                    color: black,
+                    size: proportionalWidth(screenWidth, 25),
+                  ),
+                  itemBuilder: (context) {
+                    return [
+                      // Settings
+                      const PopupMenuItem(
+                        value: MenuItems.settings,
+                        child: Text(
+                          "Settings",
+                          style: dropDownMenuTextStyle,
+                        ),
+                      ),
+                      // Logout
+                      const PopupMenuItem(
+                        value: MenuItems.logout,
+                        child: Text("Logout", style: dropDownMenuTextStyle),
+                      ),
+                    ];
+                  },
+                ),
+
                 // Title: Dropdown Menu and Menu Items
                 // to select a tab: Home, Profiles, Governance, Elections
                 title: DropdownButton<int>(
+                  alignment: Alignment.center,
                   underline: Container(),
                   borderRadius: BorderRadius.circular(20),
                   icon: const Icon(
@@ -93,65 +151,15 @@ class _MainUIState extends State<MainUI> {
                     ),
                   ],
                 ),
-                //Menu and Menu Items
-                leading: PopupMenuButton<MenuItems>(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  onSelected: (value) async {
-                    switch (value) {
-                      case MenuItems.settings:
-                        //Navigator.pushNamed(context, settings);
-                        break;
-                      case MenuItems.logout:
-                        showErrorDialog(
-                          context,
-                          "Are you sure you want to logout?",
-                        );
-                        break;
-                    }
-                  },
-                  icon: const Icon(
-                    Icons.menu,
-                    color: black,
-                    size: 30,
-                  ),
-                  itemBuilder: (context) {
-                    return [
-                      // Settings
-                      PopupMenuItem(
-                        value: MenuItems.settings,
-                        child: Row(
-                          children: const [
-                            Icon(Icons.settings_rounded),
-                            Text(
-                              "Settings",
-                              style: dropDownMenuTextStyle,
-                            ),
-                          ],
-                        ),
-                      ),
-                      // Logout
-                      PopupMenuItem(
-                        value: MenuItems.logout,
-                        child: Row(
-                          children: const [
-                            Icon(Icons.logout_rounded),
-                            Text("Logout", style: dropDownMenuTextStyle),
-                          ],
-                        ),
-                      ),
-                    ];
-                  },
-                ),
-                backgroundColor: white,
+
+                // App Bar's Search and Profile Avatar
                 actions: [
                   //Search Icon
                   IconButton(
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.search_rounded,
                       color: black,
-                      size: 30,
+                      size: proportionalWidth(screenWidth, 25),
                     ),
                     onPressed: () {
                       setState(() {
@@ -164,14 +172,12 @@ class _MainUIState extends State<MainUI> {
                     width: 32,
                     height: 32,
                     margin: const EdgeInsets.only(right: 10),
-                    child: const CircleAvatar(
+                    child: CircleAvatar(
                       backgroundColor: navyBlue,
-                      //backgroundImage: AssetImage("assets/images/profile.jpg")
                       child: Text(
-                        "C",
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontFamily: "Inter",
+                        getEmailFirstLetter(),
+                        style: const TextStyle(
+                            fontSize: 15,
                             fontWeight: FontWeight.normal,
                             color: white),
                       ),
@@ -179,13 +185,16 @@ class _MainUIState extends State<MainUI> {
                   ),
                 ],
               )
+            // App Bar (Back Arrow, Search Bar)
             : AppBar(
+                backgroundColor: white,
                 leadingWidth: proportionalWidth(screenWidth, 30),
+                //Back Arrow
                 leading: IconButton(
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.arrow_back_rounded,
                     color: black,
-                    size: 25,
+                    size: proportionalWidth(screenWidth, 22),
                   ),
                   onPressed: () {
                     setState(() {
@@ -198,6 +207,7 @@ class _MainUIState extends State<MainUI> {
                   height: proportionalHeight(screenHeight, 40),
                   width: proportionalWidth(screenWidth, 330),
                   child: TextField(
+                    controller: AppControllers.searchBarController,
                     keyboardType: TextInputType.text,
                     textInputAction: TextInputAction.search,
                     style: dropDownMenuTextStyle,
@@ -211,19 +221,29 @@ class _MainUIState extends State<MainUI> {
                       enabledBorder: searchBarBorder,
                       focusedBorder: searchBarBorder,
                       hintText: "Search",
-                      hintStyle: dropDownMenuTextStyle,
+                      hintStyle: dropDownMenuTextStyle.copyWith(
+                        color: black.withOpacity(0.4),
+                      ),
                       prefixIcon: IconButton(
-                        icon: const Icon(
+                        icon: Icon(
                           Icons.search_rounded,
                           color: black,
-                          size: 20,
+                          size: proportionalWidth(screenWidth, 20),
                         ),
                         onPressed: () {},
+                      ),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          Icons.clear_outlined,
+                          color: black,
+                          size: proportionalWidth(screenWidth, 20),
+                        ),
+                        onPressed: () =>
+                            AppControllers.searchBarController.clear(),
                       ),
                     ),
                   ),
                 ),
-                backgroundColor: white,
               ),
 
         // Bottom Navigation Bar (Home, Profiles, Governance, Politics)

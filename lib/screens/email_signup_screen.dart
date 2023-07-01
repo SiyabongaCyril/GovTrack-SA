@@ -135,8 +135,9 @@ class _EmailSignupScreenState extends State<EmailSignupScreen> {
               textFieldController: AppControllers.emailEmailController,
               suffixWidget: isEmailValid
                   ? const Icon(
-                      Icons.check_circle,
+                      Icons.check_circle_outline_outlined,
                       color: orange,
+                      size: 18,
                     )
                   : null),
 

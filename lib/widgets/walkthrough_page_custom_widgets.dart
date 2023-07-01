@@ -1,7 +1,7 @@
 import 'widget_barrel.dart';
 // Custom Widgets for the welcome screen
 
-// The custom container for a page description
+// The custom container for app description pages
 class AppWalkthrough extends StatelessWidget {
   // App description selector from description list
   final int appDescriptionIndex;
@@ -21,27 +21,34 @@ class AppWalkthrough extends StatelessWidget {
       color: white,
       child: Container(
         padding: EdgeInsets.only(
-          top: proportionalHeight(screenHeight, 50),
-          bottom: proportionalHeight(screenHeight, 47),
+          top: proportionalHeight(screenHeight, 20),
+          bottom: proportionalHeight(screenHeight, 20),
           left: proportionalWidth(screenWidth, 32),
           right: proportionalWidth(screenWidth, 32),
         ),
         alignment: Alignment.center,
-        width: proportionalWidth(screenWidth, 320),
-        height: proportionalHeight(screenHeight, 225),
+        width: proportionalWidth(screenWidth, 290),
+        height: proportionalHeight(screenHeight, 190),
         decoration: const BoxDecoration(
-          color: orange,
+          border: Border.fromBorderSide(
+            BorderSide(
+              color: navyBlue,
+              width: 1,
+            ),
+          ),
+          color: grey,
           borderRadius: BorderRadiusDirectional.all(
-            Radius.circular(20),
+            Radius.circular(30),
           ),
         ),
+        // Description
         child: Text(
-          textAlign: TextAlign.center,
+          textAlign: TextAlign.justify,
           featureDescription[appDescriptionIndex],
           style: TextStyle(
-            fontSize: proportionalHeight(screenHeight, 15),
-            fontWeight: FontWeight.normal,
-            color: white,
+            fontSize: proportionalHeight(screenHeight, 14),
+            fontWeight: FontWeight.w300,
+            color: black,
           ),
         ),
       ),
@@ -52,10 +59,13 @@ class AppWalkthrough extends StatelessWidget {
 // App description text
 //Limit to a size of 4
 List<String> featureDescription = [
-  "View Politician's Profiles",
-  "Access Political Party Information",
-  "Do you want an alert\nfor the State of the Nation Address?\nWe got you.",
-  "Offline Access?\nLet's get started.",
+  "View Politician's Profiles:\n\nGet detailed information\nabout politicians.",
+  "Access Political\nParty Information:\n\nStay up-to-date with the\nlatest "
+      "news and events.",
+  "Stay Informed with State of\nthe Nation Address Alerts:\n\nReceive"
+      "notifications for \nimportant updates.",
+  "Offline Access for On-the-Go:\n\nEnjoy offline access to\nstay connected"
+      "even without\nan internet connection.",
 ];
 
 enum CircleColors { white, orange }
@@ -79,8 +89,9 @@ class WalkthroughPageCircle extends StatelessWidget {
           width: proportionalWidth(screenWidth, 7),
         ),
         Container(
-          width: proportionalWidth(screenWidth, 12),
-          height: proportionalHeight(screenHeight, 12),
+          // Circle size
+          width: proportionalWidth(screenWidth, 10),
+          height: proportionalHeight(screenHeight, 10),
           decoration: BoxDecoration(
             border: const Border.fromBorderSide(
               BorderSide(

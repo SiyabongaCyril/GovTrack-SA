@@ -28,7 +28,7 @@ class SignupFieldContainer extends StatelessWidget {
         ),
         alignment: Alignment.topCenter,
         width: proportionalWidth(screenWidth, 287),
-        height: proportionalHeight(screenHeight, 50),
+        height: proportionalHeight(screenHeight, 45),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             border: Border.all(
@@ -43,7 +43,7 @@ class SignupFieldContainer extends StatelessWidget {
 }
 
 // Defines the button for signup options:
-// gmail, phone and other
+// email, phone and other
 class SignupOptionButton extends StatelessWidget {
   const SignupOptionButton(
       {super.key, required this.text, required this.widget});
@@ -74,9 +74,9 @@ class SignupOptionButton extends StatelessWidget {
           Text(
             text,
             style: TextStyle(
-                fontSize: proportionalHeight(screenHeight, 14),
-                color: navyBlue,
-                fontFamily: "Inter",
+                fontSize: proportionalHeight(screenHeight, 13),
+                color: //dark navy blue
+                    black,
                 fontWeight: FontWeight.w300),
           ),
         ],
@@ -113,14 +113,18 @@ class SignupLoginTextField extends StatelessWidget {
     return Column(
       children: [
         // Text Field Heading
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            headingText,
-            style: const TextStyle(
-              fontSize: 17,
-              fontFamily: "Inter",
-              fontWeight: FontWeight.w300,
+        Padding(
+          padding: EdgeInsets.only(
+            left: proportionalWidth(screenHeight, 5),
+          ),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              headingText,
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w300,
+              ),
             ),
           ),
         ),
@@ -134,8 +138,7 @@ class SignupLoginTextField extends StatelessWidget {
             onChanged: onTextFieldChanged,
             controller: textFieldController,
             style: const TextStyle(
-              fontSize: 16,
-              fontFamily: "Inter",
+              fontSize: 14,
               fontWeight: FontWeight.w300,
               color: navyBlue,
             ),
@@ -148,16 +151,15 @@ class SignupLoginTextField extends StatelessWidget {
               ),
               hintText: hintText,
               hintStyle: TextStyle(
-                fontSize: 15,
+                fontSize: 14,
                 fontStyle: FontStyle.italic,
-                fontFamily: "Inter",
                 fontWeight: FontWeight.w300,
                 color: black.withOpacity(0.2),
               ),
             ),
           ),
         ),
-        //Text showing error in textfield
+        //Text showing error in textfield if there's any
         Padding(
           padding: EdgeInsets.only(
             right: proportionalWidth(screenHeight, 5),
