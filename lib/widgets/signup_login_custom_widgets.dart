@@ -8,12 +8,13 @@ class SignupFieldContainer extends StatelessWidget {
   const SignupFieldContainer({
     super.key,
     required this.widget,
-    this.containerColor = white,
+    this.containerColor = Colors.white,
   });
   final Widget widget;
 
   @override
   Widget build(BuildContext context) {
+    changeAppColors(context);
     double statusBarHeight = MediaQuery.of(context).padding.top;
     double screenHeight = MediaQuery.of(context).size.height - statusBarHeight;
     double screenWidth = MediaQuery.of(context).size.width;
@@ -52,6 +53,7 @@ class SignupOptionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    changeAppColors(context);
     double statusBarHeight = MediaQuery.of(context).padding.top;
     double screenHeight = MediaQuery.of(context).size.height - statusBarHeight;
     double screenWidth = MediaQuery.of(context).size.width;
@@ -108,6 +110,7 @@ class SignupLoginTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    changeAppColors(context);
     double statusBarHeight = MediaQuery.of(context).padding.top;
     double screenHeight = MediaQuery.of(context).size.height - statusBarHeight;
     return Column(
@@ -122,9 +125,7 @@ class SignupLoginTextField extends StatelessWidget {
             child: Text(
               headingText,
               style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w300,
-              ),
+                  fontSize: 14, fontWeight: FontWeight.w300, color: black),
             ),
           ),
         ),
@@ -133,6 +134,7 @@ class SignupLoginTextField extends StatelessWidget {
         ),
         // Bordered Text Field
         SignupFieldContainer(
+          containerColor: white,
           widget: TextField(
             keyboardType: keyboardType,
             onChanged: onTextFieldChanged,

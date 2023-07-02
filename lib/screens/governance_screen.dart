@@ -5,6 +5,12 @@ class GovernanceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text("Governance");
+    changeAppColors(context);
+    return const Text(
+      "Governance: Upcoming Feature",
+      style: TextStyle(
+        color: black,
+      ),
+    );
   }
 }

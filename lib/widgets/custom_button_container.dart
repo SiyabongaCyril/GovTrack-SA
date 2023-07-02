@@ -14,7 +14,7 @@ class CustomButtonContainer extends StatelessWidget {
     super.key,
     this.color = navyBlue,
     required this.text,
-    this.textColor = white,
+    this.textColor = Colors.white,
     this.borderColor = navyBlue,
     required this.onPressed,
     this.addButtonShadow = false,
@@ -22,6 +22,7 @@ class CustomButtonContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    changeAppColors(context);
     double statusBarHeight = MediaQuery.of(context).padding.top;
     double screenHeight = MediaQuery.of(context).size.height - statusBarHeight;
     double screenWidth = MediaQuery.of(context).size.width;
@@ -38,8 +39,8 @@ class CustomButtonContainer extends StatelessWidget {
           addButtonShadow
               ? const BoxShadow(
                   color: black,
-                  offset: Offset(-2, 3),
-                  blurRadius: 1,
+                  offset: Offset(-1, 2),
+                  blurRadius: 0.1,
                 )
               : const BoxShadow(
                   color: transparent,

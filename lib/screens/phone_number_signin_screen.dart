@@ -31,6 +31,7 @@ class _PhoneSignupScreenState extends State<PhoneSignupScreen> {
 
   @override
   Widget build(BuildContext context) {
+    changeAppColors(context);
     return SignupLoginSamplePage(
       onPressed: () {},
       buttonType: ButtonType.signup,

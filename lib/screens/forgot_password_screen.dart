@@ -66,6 +66,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
+    changeAppColors(context);
     double statusBarHeight = MediaQuery.of(context).padding.top;
     double screenHeight = MediaQuery.of(context).size.height - statusBarHeight;
     double screenWidth = MediaQuery.of(context).size.width;
@@ -86,6 +87,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 style: TextStyle(
                   fontSize: proportionalHeight(screenHeight, 13),
                   fontWeight: FontWeight.w300,
+                  color: black,
                 ),
               ),
 

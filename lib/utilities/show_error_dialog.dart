@@ -1,8 +1,7 @@
 // ERROR DIALOG METHODS
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:gov_track_sa/widgets/custom_button_container.dart';
+import 'app_colors.dart';
 import '../services/auth/govtracksa_auth.dart';
 import 'dimension_methods.dart';
 import 'navigators.dart';
@@ -15,12 +14,14 @@ Future<void> showErrorDialog(BuildContext context, String text) {
     context: context,
     builder: (context) {
       return AlertDialog(
+        backgroundColor: white,
         actionsPadding: const EdgeInsets.all(20),
         title: const Text(
           "Logout",
           style: TextStyle(
             fontSize: 15,
             fontWeight: FontWeight.bold,
+            color: black,
           ),
         ),
         shape: ShapeBorder.lerp(
@@ -37,6 +38,7 @@ Future<void> showErrorDialog(BuildContext context, String text) {
           style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w300,
+            color: black,
           ),
         ),
         actions: [
@@ -47,6 +49,7 @@ Future<void> showErrorDialog(BuildContext context, String text) {
                 width: proportionalWidth(deviceWidth, 70),
                 height: proportionalHeight(deviceHeight, 25),
                 child: CustomButtonContainer(
+                  textColor: white,
                   text: "No",
                   onPressed: () {
                     //close dialog
@@ -58,10 +61,10 @@ Future<void> showErrorDialog(BuildContext context, String text) {
                 width: proportionalWidth(deviceWidth, 70),
                 height: proportionalHeight(deviceHeight, 25),
                 child: CustomButtonContainer(
+                  textColor: white,
                   text: "Yes",
                   onPressed: () async {
                     await AppAuth.auth.logOut(context: context).then((value) {
-                      log("Logged out successfully");
                       navigatePushNamedAndRemoveUntil(context, login);
                     });
                   },

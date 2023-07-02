@@ -1,7 +1,6 @@
-import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gov_track_sa/utilities/show_error_dialog.dart';
+import '../services/auth/govtracksa_auth.dart';
 import '../utilities/controllers.dart';
 import 'mainui_styles_widgets.dart';
 import 'status_bar_container.dart';
@@ -12,6 +11,8 @@ import '/screens/elections_screen.dart';
 import '/screens/profiles_screen.dart';
 
 enum MenuItems { settings, logout }
+
+enum CircleAvatarItems { userInfo }
 
 // Main UI root widget: HomeScreen
 class MainUI extends StatefulWidget {
@@ -40,6 +41,7 @@ class _MainUIState extends State<MainUI> {
 
   @override
   Widget build(BuildContext context) {
+    changeAppColors(context);
     double statusBarHeight = MediaQuery.of(context).padding.top;
     double screenHeight = MediaQuery.of(context).size.height - statusBarHeight;
     double screenWidth = MediaQuery.of(context).size.width;
@@ -48,19 +50,20 @@ class _MainUIState extends State<MainUI> {
       // Update this to be a method in auth helper auth service
       // It's not good practice calling Firebase in the UI
       final user = FirebaseAuth.instance.currentUser;
-      log("${user ?? "No User"}");
       return user!.email.toString()[0].toUpperCase();
     }
 
     return StatusBarContainer(
       color: white,
       widget: Scaffold(
+        backgroundColor: white,
         appBar: _searching == false
             // App Bar (Menu, Title, Search, Profile Avatar),
             ? AppBar(
                 backgroundColor: white,
                 //Menu and Menu Items
                 leading: PopupMenuButton<MenuItems>(
+                  color: white,
                   position: PopupMenuPosition.over,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
@@ -106,6 +109,7 @@ class _MainUIState extends State<MainUI> {
                 // Title: Dropdown Menu and Menu Items
                 // to select a tab: Home, Profiles, Governance, Elections
                 title: DropdownButton<int>(
+                  dropdownColor: white,
                   alignment: Alignment.center,
                   underline: Container(),
                   borderRadius: BorderRadius.circular(20),
@@ -168,21 +172,42 @@ class _MainUIState extends State<MainUI> {
                     },
                   ),
                   //Profile Avatar
-                  Container(
-                    width: 32,
-                    height: 32,
-                    margin: const EdgeInsets.only(right: 10),
-                    child: CircleAvatar(
-                      backgroundColor: navyBlue,
-                      child: Text(
-                        getEmailFirstLetter(),
-                        style: const TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.normal,
-                            color: white),
+                  PopupMenuButton<CircleAvatarItems>(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
                       ),
-                    ),
-                  ),
+                      color: navyBlue,
+                      icon: SizedBox(
+                        width: 32,
+                        height: 32,
+                        child: CircleAvatar(
+                          backgroundColor: navyBlue,
+                          child: Text(
+                            getEmailFirstLetter(),
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.normal,
+                                color: white),
+                          ),
+                        ),
+                      ),
+                      itemBuilder: (context) {
+                        return [
+                          PopupMenuItem<CircleAvatarItems>(
+                            padding: EdgeInsets.only(
+                              left: proportionalWidth(screenWidth, 30),
+                            ),
+                            child: Text(
+                              "${AppAuth.auth.currentUser?.userId}",
+                              style: TextStyle(
+                                color: white,
+                                fontSize: proportionalHeight(screenHeight, 14),
+                                fontWeight: FontWeight.w300,
+                              ),
+                            ),
+                          )
+                        ];
+                      })
                 ],
               )
             // App Bar (Back Arrow, Search Bar)
@@ -197,6 +222,7 @@ class _MainUIState extends State<MainUI> {
                     size: proportionalWidth(screenWidth, 22),
                   ),
                   onPressed: () {
+                    AppControllers.searchBarController.clear();
                     setState(() {
                       _searching = !_searching;
                     });

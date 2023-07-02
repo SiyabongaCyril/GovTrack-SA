@@ -5,6 +5,12 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text("Home");
+    changeAppColors(context);
+    return const Text(
+      "Home: Upcoming Feature",
+      style: TextStyle(
+        color: black,
+      ),
+    );
   }
 }

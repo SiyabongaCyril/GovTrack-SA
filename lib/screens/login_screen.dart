@@ -1,6 +1,4 @@
-import 'dart:developer';
 import 'package:email_validator/email_validator.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gov_track_sa/services/auth/govtracksa_auth.dart';
 import 'package:gov_track_sa/widgets/signup_login_custom_widgets.dart';
 import 'package:gov_track_sa/widgets/signup_login_sample_page.dart';
@@ -39,7 +37,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
 // This function is used to check if the email entered is valid
   void checkEMailValidity() {
-    log("Checking email validity");
     setState(() {
       isEmailValid = EmailValidator.validate(
           AppControllers.loginUsernameController.text, true, true);
@@ -71,24 +68,28 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   // change the state of the circular progress indicator
-  void changeCircularProgressIndicatorState() {
+  void changeCircularProgressIndicatorState(bool state) {
     setState(() {
-      showCircularProgressIndicator = !showCircularProgressIndicator;
+      showCircularProgressIndicator = state;
+    });
+  }
+
+  void isEMailVerificationSent(bool state) {
+    setState(() {
+      isEmailVerificationSent = state;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    changeAppColors(context);
     checkEMailValidity();
     return SignupLoginSamplePage(
       showCircularProgressIndicator: showCircularProgressIndicator,
       onPressed: () async {
-        //isEmailVerificationSent = false;
-        final user = FirebaseAuth.instance.currentUser;
-        log("$user");
+        isEMailVerificationSent(false);
         try {
           // error checking
-
           if (AppControllers.loginUsernameController.text.isEmpty ||
               AppControllers.loginPasswordController.text.isEmpty) {
             showSnackBar("Please fill in all the required fields.", context);
@@ -97,8 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
             showSnackBar("Please enter a valid email.", context);
             return;
           } else {
-            changeCircularProgressIndicatorState();
-            log("Trying to login user");
+            changeCircularProgressIndicatorState(true);
             await AppAuth.auth
                 .logIn(
               email: AppControllers.loginUsernameController.text,
@@ -106,36 +106,33 @@ class _LoginScreenState extends State<LoginScreen> {
               context: context,
             )
                 .then((value) async {
-              log("Login successful");
-              showCircularProgressIndicator == true
-                  ? changeCircularProgressIndicatorState()
-                  : null;
-
               if (AppAuth.auth.currentUser?.isEmailVerified == true) {
+                changeCircularProgressIndicatorState(false);
                 navigatePushNamedAndRemoveUntil(context, mainui);
               } else {
                 await AppAuth.auth.sendEmailVerification(context: context).then(
                   (value) async {
                     await AppAuth.auth.logOut(context: context).then(
-                          (value) => showCircularProgressIndicator == true
-                              ? changeCircularProgressIndicatorState()
-                              : null,
+                          (value) =>
+                              changeCircularProgressIndicatorState(false),
                         );
-                    setState(() {
-                      isEmailVerificationSent = true;
-                    });
+                    isEMailVerificationSent(true);
                   },
                 );
               }
             });
           }
         } catch (e) {
-          await AppAuth.auth.logOut(context: context);
-          log("Login failed");
-
-          showCircularProgressIndicator == true
-              ? changeCircularProgressIndicatorState()
-              : null;
+          if (AppAuth.auth.currentUser != null) {
+            await AppAuth.auth.logOut(context: context);
+          } // if user is sending an email verification after sending one:
+          if (e.toString() ==
+              "[firebase_auth/too-many-requests] We have"
+                  " blocked all requests from this device due to unusual activity."
+                  " Try again later.") {
+            isEMailVerificationSent(true);
+          }
+          changeCircularProgressIndicatorState(false);
         }
       },
       buttonType: ButtonType.login,

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gov_track_sa/constants/app_colors.dart';
+import 'package:gov_track_sa/utilities/app_colors.dart';
 import 'package:gov_track_sa/screens/forgot_password_screen.dart';
 import 'package:gov_track_sa/screens/phone_number_signin_screen.dart';
 import 'package:gov_track_sa/screens/signup_screen.dart';
-//import 'package:gov_track_sa/screens/test_screen.dart';
 import 'package:gov_track_sa/services/auth/govtracksa_auth.dart';
 import 'package:gov_track_sa/utilities/navigators.dart';
 import 'screens/email_signup_screen.dart';
@@ -18,13 +17,18 @@ void main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   // This widget is the root of the application.
   const MyApp({super.key});
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
   Widget build(BuildContext context) {
-    // Set the app's orientation to portrait only
+    // Set the app's orientation to portra
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
     return MaterialApp(
@@ -42,10 +46,8 @@ class MyApp extends StatelessWidget {
             : const WelcomeScreen(),
       ), // Set the home screen to WelcomeScreen
       // App theme
-      // theme: ThemeData(
-      //fontFamily: "Montserrat", // Set the default font family
-      //     ),
-      // Define the app's named routes
+      theme: ThemeData.light().copyWith(primaryColor: navyBlue),
+      darkTheme: ThemeData.dark().copyWith(primaryColor: navyBlue),
       routes: {
         signup: (context) => const SignupScreen(),
         emailsignup: (context) => const EmailSignupScreen(),

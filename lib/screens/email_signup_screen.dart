@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:gov_track_sa/services/auth/govtracksa_auth.dart';
 import 'package:gov_track_sa/utilities/show_snack_bar.dart';
 import 'package:gov_track_sa/widgets/signup_login_custom_widgets.dart';
@@ -69,21 +67,20 @@ class _EmailSignupScreenState extends State<EmailSignupScreen> {
     return isEmailValidUponSignup;
   }
 
-  // change the state of the circular progress indicator
-  void changeCircularProgressIndicatorState() {
+  void changeCircularProgressIndicatorStatus(bool status) {
     setState(() {
-      showCircularProgressIndicator = !showCircularProgressIndicator;
+      showCircularProgressIndicator = status;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    changeAppColors(context);
     return SignupLoginSamplePage(
       showCircularProgressIndicator: showCircularProgressIndicator,
       onPressed: () async {
-        try {
 // error checking
-
+        try {
           if (AppControllers.emailEmailController.text.isEmpty ||
               AppControllers.emailPasswordController.text.isEmpty ||
               AppControllers.emailConfirmPasswordController.text.isEmpty) {
@@ -97,8 +94,7 @@ class _EmailSignupScreenState extends State<EmailSignupScreen> {
             showSnackBar("Passwords do not match.", context);
             return;
           } else {
-            changeCircularProgressIndicatorState();
-            log("Trying to register user");
+            changeCircularProgressIndicatorStatus(true);
             await AppAuth.auth
                 .register(
               email: AppControllers.emailEmailController.text,
@@ -106,19 +102,19 @@ class _EmailSignupScreenState extends State<EmailSignupScreen> {
               context: context,
             )
                 .then(
-              (value) {
-                log("Signup successful");
-                AppControllers.setLoginTextFields(
-                    AppControllers.emailEmailController.text,
-                    AppControllers.emailPasswordController.text);
-                changeCircularProgressIndicatorState();
-                navigateAndPushNamed(context, login);
+              (value) async {
+                await AppAuth.auth.logOut(context: context).then((value) {
+                  AppControllers.setLoginTextFields(
+                      AppControllers.emailEmailController.text,
+                      AppControllers.emailPasswordController.text);
+                  changeCircularProgressIndicatorStatus(false);
+                  navigateAndPushNamed(context, login);
+                });
               },
             );
           }
         } catch (e) {
-          log("Signup failed");
-          changeCircularProgressIndicatorState();
+          changeCircularProgressIndicatorStatus(false);
         }
       },
       addMap: true,

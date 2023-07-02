@@ -9,6 +9,7 @@ class AppWalkthrough extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    changeAppColors(context);
     double statusBarHeight = MediaQuery.of(context).padding.top;
     double screenHeight = MediaQuery.of(context).size.height - statusBarHeight;
     double screenWidth = MediaQuery.of(context).size.width;
@@ -29,15 +30,15 @@ class AppWalkthrough extends StatelessWidget {
         alignment: Alignment.center,
         width: proportionalWidth(screenWidth, 290),
         height: proportionalHeight(screenHeight, 190),
-        decoration: const BoxDecoration(
-          border: Border.fromBorderSide(
+        decoration: BoxDecoration(
+          border: const Border.fromBorderSide(
             BorderSide(
               color: navyBlue,
               width: 1,
             ),
           ),
           color: grey,
-          borderRadius: BorderRadiusDirectional.all(
+          borderRadius: const BorderRadiusDirectional.all(
             Radius.circular(30),
           ),
         ),
@@ -62,9 +63,9 @@ List<String> featureDescription = [
   "View Politician's Profiles:\n\nGet detailed information\nabout politicians.",
   "Access Political\nParty Information:\n\nStay up-to-date with the\nlatest "
       "news and events.",
-  "Stay Informed with State of\nthe Nation Address Alerts:\n\nReceive"
+  "Stay Informed with State of\nthe Nation Address Alerts:\n\nReceive "
       "notifications for \nimportant updates.",
-  "Offline Access for On-the-Go:\n\nEnjoy offline access to\nstay connected"
+  "Offline Access for On-the-Go:\n\nEnjoy offline access to\nstay connected "
       "even without\nan internet connection.",
 ];
 
@@ -79,6 +80,7 @@ class WalkthroughPageCircle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    changeAppColors(context);
     double statusBarHeight = MediaQuery.of(context).padding.top;
     double screenHeight = MediaQuery.of(context).size.height - statusBarHeight;
     double screenWidth = MediaQuery.of(context).size.width;

@@ -28,6 +28,7 @@ class SignupLoginSamplePage extends StatefulWidget {
 class _SignupLoginSamplePageState extends State<SignupLoginSamplePage> {
   @override
   Widget build(BuildContext context) {
+    changeAppColors(context);
     double statusBarHeight = MediaQuery.of(context).padding.top;
     double screenHeight = MediaQuery.of(context).size.height - statusBarHeight;
     double screenWidth = MediaQuery.of(context).size.width;
@@ -35,6 +36,7 @@ class _SignupLoginSamplePageState extends State<SignupLoginSamplePage> {
     return StatusBarContainer(
       color: white,
       widget: Scaffold(
+        backgroundColor: white,
         //resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
@@ -185,12 +187,14 @@ class _SignupLoginSamplePageState extends State<SignupLoginSamplePage> {
                       alignment: Alignment.centerRight,
                       child: widget.buttonType == ButtonType.login
                           ? CustomButtonContainer(
+                              textColor: white,
                               addButtonShadow: true,
                               onPressed: widget.onPressed,
                               text: "Login",
                             )
                           : widget.buttonType == ButtonType.signup
                               ? CustomButtonContainer(
+                                  textColor: white,
                                   addButtonShadow: true,
                                   onPressed: widget.onPressed,
                                   text: "Sign up",

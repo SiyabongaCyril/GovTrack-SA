@@ -5,6 +5,12 @@ class ProfilesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text("Profiles");
+    changeAppColors(context);
+    return const Text(
+      "Profiles: Upcoming Feature",
+      style: TextStyle(
+        color: black,
+      ),
+    );
   }
 }

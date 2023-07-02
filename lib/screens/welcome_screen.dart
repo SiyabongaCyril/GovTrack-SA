@@ -20,6 +20,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    changeAppColors(context);
     double statusBarHeight = MediaQuery.of(context).padding.top;
     double screenHeight = MediaQuery.of(context).size.height - statusBarHeight;
     double screenWidth = MediaQuery.of(context).size.width;
@@ -30,7 +31,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         body: Stack(
           alignment: Alignment.center,
           children: [
-            //The container
+            //The top container
             Container(
               width: screenWidth,
               height: screenHeight,
@@ -120,6 +121,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           CustomButtonContainer(
+                            textColor: white,
                             addButtonShadow: true,
                             text: "Get started",
                             onPressed: () =>

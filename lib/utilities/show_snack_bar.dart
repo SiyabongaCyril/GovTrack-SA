@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../constants/app_colors.dart';
+import 'app_colors.dart';
 
 showSnackBar(String text, BuildContext context) {
   ScaffoldMessenger.of(context).showSnackBar(
@@ -7,7 +7,7 @@ showSnackBar(String text, BuildContext context) {
       backgroundColor: navyBlue,
       content: Text(
         text,
-        style: const TextStyle(
+        style: TextStyle(
           color: white,
           fontSize: 13,
           fontWeight: FontWeight.w300,

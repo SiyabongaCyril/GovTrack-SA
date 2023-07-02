@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 //In our app, all we need to know about the user is if its email is verified
 @immutable
 class AuthUser {
-  const AuthUser({required this.isEmailVerified});
+  const AuthUser({required this.isEmailVerified, required this.userId});
   final bool isEmailVerified;
+  final String userId;
 
   factory AuthUser.fromFirebase(firebase_auth.User user) {
-    return AuthUser(isEmailVerified: user.emailVerified);
+    return AuthUser(
+        isEmailVerified: user.emailVerified, userId: user.email ?? '');
   }
 }

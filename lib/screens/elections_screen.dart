@@ -5,6 +5,12 @@ class ElectionsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text("Politics");
+    changeAppColors(context);
+    return const Text(
+      "Elections: Upcoming Feature",
+      style: TextStyle(
+        color: black,
+      ),
+    );
   }
 }
