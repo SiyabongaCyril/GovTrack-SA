@@ -6,7 +6,7 @@ A flutter project developed as a final project for [PowerLearnProject](https://p
 
 
 ## Introduction
-GovTrackSA, a simple and user-friendly mobile app that puts all the important
+GovTrackSA, a simple and user-friendly android mobile app that puts all the important
 government information at your fingertips. With GovTrackSA, you can easily
 search or click your way to find details about the political structure, government officials,
 upcoming elections, and even receive notifications for important speeches by
