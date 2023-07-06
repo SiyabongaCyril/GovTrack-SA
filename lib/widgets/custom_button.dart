@@ -1,16 +1,9 @@
 import 'widget_barrel.dart';
 
-// Small custom application button. Used throughout the application
-// "Is an elevated button wrapped with a container for styling"
-class CustomButtonContainer extends StatelessWidget {
-  final Color color;
-  final Color textColor;
-  final String text;
-  final Color borderColor;
-  final void Function() onPressed;
-  final bool addButtonShadow;
-
-  const CustomButtonContainer({
+// Elevated button with custom styling : Used for login, signup,
+// get started buttons and more
+class CustomButton extends StatelessWidget {
+  const CustomButton({
     super.key,
     this.color = navyBlue,
     required this.text,
@@ -19,6 +12,11 @@ class CustomButtonContainer extends StatelessWidget {
     required this.onPressed,
     this.addButtonShadow = false,
   });
+
+  final String text;
+  final bool addButtonShadow;
+  final void Function() onPressed;
+  final Color color, textColor, borderColor;
 
   @override
   Widget build(BuildContext context) {
@@ -52,20 +50,18 @@ class CustomButtonContainer extends StatelessWidget {
           color: borderColor,
         ),
       ),
-      child: Center(
-        child: ElevatedButton(
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(transparent),
-            shadowColor: MaterialStateProperty.all(transparent),
-          ),
-          onPressed: onPressed,
-          child: Text(
-            text,
-            style: TextStyle(
-              color: textColor,
-              fontSize: proportionalHeight(screenHeight, 13),
-              fontWeight: FontWeight.w300,
-            ),
+      child: ElevatedButton(
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(transparent),
+          shadowColor: MaterialStateProperty.all(transparent),
+        ),
+        onPressed: onPressed,
+        child: Text(
+          text,
+          style: TextStyle(
+            color: textColor,
+            fontSize: proportionalHeight(screenHeight, 13),
+            fontWeight: FontWeight.w300,
           ),
         ),
       ),

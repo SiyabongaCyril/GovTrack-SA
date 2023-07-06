@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'dimension_methods.dart';
 
 // Welcome screen clipper for the custom shape with gradient
-class WelcomeBottomClipper extends CustomClipper<Path> {
-  final double screenHeight;
-  final double screenWidth;
-  const WelcomeBottomClipper(this.screenWidth, this.screenHeight);
+class WelcomeScreenClipper extends CustomClipper<Path> {
+  const WelcomeScreenClipper(this.screenWidth, this.screenHeight);
+
+  final double screenHeight, screenWidth;
 
   @override
   Path getClip(Size size) {

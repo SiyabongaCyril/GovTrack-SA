@@ -19,6 +19,7 @@ void appColorsFromLight() {
   grey = const Color(0xFFD9D9D9);
 }
 
+// Change the app's colours based on the device's brightness mode
 void changeAppColors(BuildContext context) {
   if (MediaQuery.of(context).platformBrightness == Brightness.dark) {
     appColorsFromDark();

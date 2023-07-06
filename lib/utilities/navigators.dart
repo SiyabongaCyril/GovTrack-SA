@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 
 // App navigators
 const signup = "/signup";
-const emailsignup = "/gmailsignup";
+const emailsignup = "/emailsignup";
 const login = "/login";
 const welcome = "/welcome";
 const phonesignup = "/phonesignup";
 const homepage = "/homepage";
 const mainui = "/mainui";
 const forgotpassword = "/forgotpassword";
+const settings = "/settings";
 
 // Methods for navigation
 

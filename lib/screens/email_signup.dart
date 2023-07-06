@@ -1,8 +1,9 @@
 import 'package:gov_track_sa/services/auth/govtracksa_auth.dart';
 import 'package:gov_track_sa/utilities/show_snack_bar.dart';
-import 'package:gov_track_sa/widgets/signup_login_custom_widgets.dart';
-import 'package:gov_track_sa/widgets/signup_login_sample_page.dart';
+import 'package:gov_track_sa/widgets/signup_login/custom_widgets.dart';
+import 'package:gov_track_sa/widgets/signup_login/custom_page.dart';
 import '../utilities/controllers.dart';
+import '../utilities/enums.dart';
 import 'screen_barrel.dart';
 import 'package:email_validator/email_validator.dart';
 
@@ -76,8 +77,8 @@ class _EmailSignupScreenState extends State<EmailSignupScreen> {
   @override
   Widget build(BuildContext context) {
     changeAppColors(context);
-    return SignupLoginSamplePage(
-      showCircularProgressIndicator: showCircularProgressIndicator,
+    return SignupLoginCustomPage(
+      showButtonCircularProgressIndicator: showCircularProgressIndicator,
       onPressed: () async {
 // error checking
         try {
@@ -120,7 +121,7 @@ class _EmailSignupScreenState extends State<EmailSignupScreen> {
       addMap: true,
       buttonType: ButtonType.signup,
       childWidget: Column(
-        // All textfields for the gmail signup screen
+        // All textfields for the email signup screen
         children: [
           // email
           SignupLoginTextField(
@@ -143,6 +144,7 @@ class _EmailSignupScreenState extends State<EmailSignupScreen> {
             hintText: "* Enter your password",
             textFieldController: AppControllers.emailPasswordController,
           ),
+
           //confirm password
           SignupLoginTextField(
             headingText: "Confirm Password:",

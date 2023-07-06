@@ -1,4 +1,9 @@
-import 'widget_barrel.dart';
+import '../../utilities/enums.dart';
+import '../../utilities/navigators.dart';
+import '../custom_button.dart';
+import '../../utilities/helper_variables.dart';
+
+import '../widget_barrel.dart';
 
 // Container for signup/login screen fields:
 // fields: password textfield, signup-options Field, email&phone number fields
@@ -179,6 +184,90 @@ class SignupLoginTextField extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+// Defines the icon for signup options:
+class SignupOptionIcon extends StatelessWidget {
+  const SignupOptionIcon({super.key, required this.icon});
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return Icon(
+      icon,
+      color: black,
+      size: 20,
+      shadows: const [
+        Shadow(
+          color: black,
+          blurRadius: 2,
+          offset: Offset(0, 0),
+        ),
+      ],
+    );
+  }
+}
+
+// button to navigate to login screen
+class LoginButton extends StatelessWidget {
+  const LoginButton({super.key, required this.buttonType});
+  final ButtonType buttonType;
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.centerRight,
+      child: CustomButton(
+        onPressed: () {
+          // navigate to login screen if I am not already
+          // on the login screen
+          bool isLoginRoute = ModalRoute.of(context)?.settings.name == login;
+
+          if (isLoginRoute) {
+            return;
+          } else {
+            currentSignupPage = login;
+            navigateToRouteAndPop(context, login, signup);
+          }
+        },
+        text: "Login",
+        color: buttonType == ButtonType.login ? black : white,
+        textColor: buttonType == ButtonType.login ? white : black,
+        borderColor: black,
+      ),
+    );
+  }
+}
+
+// button to navigate to signup screen
+class SignupButton extends StatelessWidget {
+  const SignupButton({super.key, required this.buttonType});
+  final ButtonType buttonType;
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: CustomButton(
+        onPressed: () {
+          // navigate to signup screen if I am not already
+          // on the signup screen
+          bool isSignupRoute = ModalRoute.of(context)?.settings.name == signup;
+
+          if (isSignupRoute) {
+            return;
+          } else {
+            currentSignupPage = signup;
+            navigateToRouteAndPop(context, lastSignUpScreen, login);
+          }
+        },
+        text: "Sign-up",
+        color: buttonType == ButtonType.login ? white : black,
+        textColor: buttonType == ButtonType.login ? black : white,
+        borderColor: black,
+      ),
     );
   }
 }

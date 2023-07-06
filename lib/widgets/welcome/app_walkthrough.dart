@@ -1,11 +1,13 @@
-import 'widget_barrel.dart';
-// Custom Widgets for the welcome screen
+import '../widget_barrel.dart';
+import '../../utilities/enums.dart';
+// CUSTOM WIDGETS FOR THE WELCOME SCREEN
 
-// The custom container for app description pages
+// app description pages
 class AppWalkthrough extends StatelessWidget {
+  const AppWalkthrough({super.key, required this.appDescriptionIndex});
+
   // App description selector from description list
   final int appDescriptionIndex;
-  const AppWalkthrough({super.key, required this.appDescriptionIndex});
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +29,13 @@ class AppWalkthrough extends StatelessWidget {
           left: proportionalWidth(screenWidth, 32),
           right: proportionalWidth(screenWidth, 32),
         ),
+
         alignment: Alignment.center,
+
         width: proportionalWidth(screenWidth, 290),
+
         height: proportionalHeight(screenHeight, 190),
+
         decoration: BoxDecoration(
           border: const Border.fromBorderSide(
             BorderSide(
@@ -42,6 +48,7 @@ class AppWalkthrough extends StatelessWidget {
             Radius.circular(30),
           ),
         ),
+
         // Description
         child: Text(
           textAlign: TextAlign.justify,
@@ -57,8 +64,7 @@ class AppWalkthrough extends StatelessWidget {
   }
 }
 
-// App description text
-//Limit to a size of 4
+// App description text (Limit: 4)
 List<String> featureDescription = [
   "View Politician's Profiles:\n\nGet detailed information\nabout politicians.",
   "Access Political\nParty Information:\n\nStay up-to-date with the\nlatest "
@@ -69,14 +75,14 @@ List<String> featureDescription = [
       "even without\nan internet connection.",
 ];
 
-enum CircleColors { white, orange }
-
-// The custom widget for the circle that represents
-// app description page number
+// The circle that represents app description page number
 class WalkthroughPageCircle extends StatelessWidget {
+  const WalkthroughPageCircle({
+    super.key,
+    this.circleColor = CircleColors.white,
+  });
+
   final CircleColors circleColor;
-  const WalkthroughPageCircle(
-      {super.key, this.circleColor = CircleColors.white});
 
   @override
   Widget build(BuildContext context) {
@@ -90,8 +96,9 @@ class WalkthroughPageCircle extends StatelessWidget {
         SizedBox(
           width: proportionalWidth(screenWidth, 7),
         ),
+
+        // Circle
         Container(
-          // Circle size
           width: proportionalWidth(screenWidth, 10),
           height: proportionalHeight(screenHeight, 10),
           decoration: BoxDecoration(
