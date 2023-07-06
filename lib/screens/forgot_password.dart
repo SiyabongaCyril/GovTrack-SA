@@ -4,9 +4,10 @@ import 'package:email_validator/email_validator.dart';
 import 'package:gov_track_sa/screens/screen_barrel.dart';
 import 'package:gov_track_sa/services/auth/govtracksa_auth.dart';
 import 'package:gov_track_sa/utilities/controllers.dart';
-import 'package:gov_track_sa/widgets/signup_login_custom_widgets.dart';
-import 'package:gov_track_sa/widgets/signup_login_sample_page.dart';
+import 'package:gov_track_sa/widgets/signup_login/custom_widgets.dart';
+import 'package:gov_track_sa/widgets/signup_login/custom_page.dart';
 
+import '../utilities/enums.dart';
 import '../utilities/show_snack_bar.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
@@ -74,8 +75,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     return StatusBarContainer(
       color: white,
       widget: Scaffold(
-        body: SignupLoginSamplePage(
-          showCircularProgressIndicator: showCircularProgressIndicator,
+        body: SignupLoginCustomPage(
+          showButtonCircularProgressIndicator: showCircularProgressIndicator,
           onPressed: () {},
           buttonType: ButtonType.none,
           childWidget: Column(

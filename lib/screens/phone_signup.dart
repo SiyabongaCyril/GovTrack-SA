@@ -1,6 +1,7 @@
 import '../utilities/controllers.dart';
-import '../widgets/signup_login_custom_widgets.dart';
-import '/widgets/signup_login_sample_page.dart';
+import '../utilities/enums.dart';
+import '../widgets/signup_login/custom_widgets.dart';
+import '../widgets/signup_login/custom_page.dart';
 import 'screen_barrel.dart';
 
 class PhoneSignupScreen extends StatefulWidget {
@@ -32,7 +33,7 @@ class _PhoneSignupScreenState extends State<PhoneSignupScreen> {
   @override
   Widget build(BuildContext context) {
     changeAppColors(context);
-    return SignupLoginSamplePage(
+    return SignupLoginCustomPage(
       onPressed: () {},
       buttonType: ButtonType.signup,
       addMap: false,

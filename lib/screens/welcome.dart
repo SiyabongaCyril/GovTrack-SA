@@ -1,9 +1,9 @@
+import '../utilities/enums.dart';
 import 'screen_barrel.dart';
-import 'package:gov_track_sa/widgets/walkthrough_page_custom_widgets.dart';
+import 'package:gov_track_sa/widgets/welcome/app_walkthrough.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '/utilities/welcome_screen_clipper.dart';
 
-//App's first route, the welcome screen
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
 
@@ -12,15 +12,17 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  //track's application description's current page
+  //app-feature's description page number
   int pageNum = 0;
-  //the welcome page-button to the next page will only render
-  //if the last page of  application description's pages has been viewed
+
+  // Get started button visibility
+  // (only visible on the last app description page)
   bool showButton = false;
 
   @override
   Widget build(BuildContext context) {
     changeAppColors(context);
+
     double statusBarHeight = MediaQuery.of(context).padding.top;
     double screenHeight = MediaQuery.of(context).size.height - statusBarHeight;
     double screenWidth = MediaQuery.of(context).size.width;
@@ -31,12 +33,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         body: Stack(
           alignment: Alignment.center,
           children: [
-            //The top container
+            //The top clipped container
             Container(
               width: screenWidth,
               height: screenHeight,
               color: navyBlue,
             ),
+
             //Welcome Text, render on top of the top clipped container
             Positioned(
               top: proportionalHeight(screenHeight, 53),
@@ -54,6 +57,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ),
               ),
             ),
+
             //image rendered on top of the top clipped container
             Positioned(
               left: proportionalWidth(screenWidth, 100),
@@ -64,20 +68,25 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 height: proportionalHeight(screenHeight, 150),
               ),
             ),
-            //The bottom clipped container & its contents
-            //(Page navigation circles & navigation pages)
+
+            // Clipper & PageView: App Descriptions
             ClipPath(
-              clipper: WelcomeBottomClipper(screenWidth, screenHeight),
-              //Page view for all the application description pages
+              clipper: WelcomeScreenClipper(screenWidth, screenHeight),
+
+              //Page view for all the application descriptions
               child: PageView(
                 onPageChanged: (value) {
-                  setState(() {
-                    pageNum = value;
-                    if (pageNum == 3) showButton = true;
-                    //show navigation button on last page
-                  });
+                  setState(
+                    () {
+                      pageNum = value;
+                      if (pageNum == 3) showButton = true;
+                      //show the get started button on the last page
+                    },
+                  );
                 },
+
                 scrollDirection: Axis.horizontal,
+
                 //Navigation pages
                 children: [
                   for (var i = 0; i < 4; i++)
@@ -85,6 +94,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ],
               ),
             ),
+
+            //Page navigation circles & get started container
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
@@ -99,6 +110,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     SizedBox(
                       width: proportionalWidth(screenWidth, 13),
                     ),
+
                     //Page navigation circles
                     for (var i = 0; i < 4; i++)
                       WalkthroughPageCircle(
@@ -109,6 +121,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ),
               ),
             ),
+
             showButton
                 //render the get started button on the last page
                 ? Align(
@@ -120,7 +133,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          CustomButtonContainer(
+                          CustomButton(
                             textColor: white,
                             addButtonShadow: true,
                             text: "Get started",

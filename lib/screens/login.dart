@@ -1,8 +1,10 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:gov_track_sa/services/auth/govtracksa_auth.dart';
-import 'package:gov_track_sa/widgets/signup_login_custom_widgets.dart';
-import 'package:gov_track_sa/widgets/signup_login_sample_page.dart';
+import 'package:gov_track_sa/widgets/signup_login/custom_widgets.dart';
+import 'package:gov_track_sa/widgets/signup_login/custom_page.dart';
 import '../utilities/controllers.dart';
+import '../utilities/enums.dart';
+import '../utilities/helper_variables.dart';
 import '../utilities/show_snack_bar.dart';
 import 'screen_barrel.dart';
 
@@ -84,8 +86,8 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     changeAppColors(context);
     checkEMailValidity();
-    return SignupLoginSamplePage(
-      showCircularProgressIndicator: showCircularProgressIndicator,
+    return SignupLoginCustomPage(
+      showButtonCircularProgressIndicator: showCircularProgressIndicator,
       onPressed: () async {
         isEMailVerificationSent(false);
         try {
@@ -108,6 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 .then((value) async {
               if (AppAuth.auth.currentUser?.isEmailVerified == true) {
                 changeCircularProgressIndicatorState(false);
+                lastSignUpScreen = signup;
                 navigatePushNamedAndRemoveUntil(context, mainui);
               } else {
                 await AppAuth.auth.sendEmailVerification(context: context).then(

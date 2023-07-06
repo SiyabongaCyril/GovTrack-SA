@@ -1,6 +1,6 @@
 // ERROR DIALOG METHODS
 import 'package:flutter/material.dart';
-import 'package:gov_track_sa/widgets/custom_button_container.dart';
+import 'package:gov_track_sa/widgets/custom_button.dart';
 import 'app_colors.dart';
 import '../services/auth/govtracksa_auth.dart';
 import 'dimension_methods.dart';
@@ -48,7 +48,7 @@ Future<void> showErrorDialog(BuildContext context, String text) {
               SizedBox(
                 width: proportionalWidth(deviceWidth, 70),
                 height: proportionalHeight(deviceHeight, 25),
-                child: CustomButtonContainer(
+                child: CustomButton(
                   textColor: white,
                   text: "No",
                   onPressed: () {
@@ -60,7 +60,7 @@ Future<void> showErrorDialog(BuildContext context, String text) {
               SizedBox(
                 width: proportionalWidth(deviceWidth, 70),
                 height: proportionalHeight(deviceHeight, 25),
-                child: CustomButtonContainer(
+                child: CustomButton(
                   textColor: white,
                   text: "Yes",
                   onPressed: () async {
