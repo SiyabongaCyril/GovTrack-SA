@@ -1,5 +1,8 @@
 //Main UI's  Main Menu
+
+import '../../services/auth/govtracksa_auth.dart';
 import '../../utilities/enums.dart';
+import '../../utilities/helper_variables.dart';
 import '../../utilities/navigators.dart';
 import '../../utilities/show_error_dialog.dart';
 import '../widget_barrel.dart';
@@ -28,11 +31,21 @@ class _PopupMenuState extends State<PopupMenu> {
           case MenuItems.settings:
             Navigator.pushNamed(context, settings);
             break;
+          case MenuItems.bookmarks:
+            break;
+          case MenuItems.syncApp:
+            break;
+          case MenuItems.referUs:
+            break;
           case MenuItems.logout:
             showErrorDialog(
-              context,
-              "Are you sure you want to logout?",
-            );
+                context, "Are you sure you want to logout?", "Logout",
+                () async {
+              await AppAuth.auth.logOut(context: context).then((value) {
+                currentSignupPage = login;
+                navigatePushNamedAndRemoveUntil(context, login);
+              });
+            });
             break;
         }
       },
@@ -45,43 +58,80 @@ class _PopupMenuState extends State<PopupMenu> {
       itemBuilder: (context) {
         return [
           // Settings
-          PopupMenuItem(
+          const PopupMenuItem(
             value: MenuItems.settings,
-            child: Row(
-              children: [
-                Icon(
-                  Icons.settings_rounded,
-                  color: black,
-                  size: proportionalWidth(screenWidth, 15),
-                ),
-                const SizedBox(width: 10),
-                const Text(
-                  "Settings",
-                  style: dropDownMenuTextStyle,
-                ),
-              ],
+            child: MenuItem(
+              text: "Settings",
+              icon: Icons.settings_rounded,
             ),
           ),
+
+          // Bookmarks
+          const PopupMenuItem(
+            value: MenuItems.bookmarks,
+            child: MenuItem(
+              text: "Bookmarks",
+              icon: Icons.bookmarks_rounded,
+            ),
+          ),
+
+          // Sync App
+          const PopupMenuItem(
+            value: MenuItems.syncApp,
+            child: MenuItem(
+              text: "Sync",
+              icon: Icons.sync_rounded,
+            ),
+          ),
+
+          // Refer Us
+          const PopupMenuItem(
+            value: MenuItems.referUs,
+            child: MenuItem(
+              text: "Refer Us",
+              icon: Icons.share_rounded,
+            ),
+          ),
+
           // Logout
-          PopupMenuItem(
+          const PopupMenuItem(
             value: MenuItems.logout,
-            child: Row(
-              children: [
-                Icon(
-                  Icons.logout_rounded,
-                  color: black,
-                  size: proportionalWidth(screenWidth, 15),
-                ),
-                const SizedBox(width: 10),
-                const Text(
-                  "Logout",
-                  style: dropDownMenuTextStyle,
-                ),
-              ],
+            child: MenuItem(
+              text: "Logout",
+              icon: Icons.logout_rounded,
             ),
           ),
         ];
       },
+    );
+  }
+}
+
+// Menu Items
+class MenuItem extends StatelessWidget {
+  const MenuItem({
+    super.key,
+    required this.text,
+    required this.icon,
+  });
+  final String text;
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    return ListTile(
+      minLeadingWidth: 0,
+      leading: Icon(
+        icon,
+        color: black,
+        size: proportionalWidth(screenWidth, 15),
+      ),
+      title: Text(
+        text,
+        style: dropDownMenuTextStyle,
+      ),
     );
   }
 }

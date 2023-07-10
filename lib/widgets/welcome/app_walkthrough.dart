@@ -11,7 +11,6 @@ class AppWalkthrough extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    changeAppColors(context);
     double statusBarHeight = MediaQuery.of(context).padding.top;
     double screenHeight = MediaQuery.of(context).size.height - statusBarHeight;
     double screenWidth = MediaQuery.of(context).size.width;
@@ -86,7 +85,6 @@ class WalkthroughPageCircle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    changeAppColors(context);
     double statusBarHeight = MediaQuery.of(context).padding.top;
     double screenHeight = MediaQuery.of(context).size.height - statusBarHeight;
     double screenWidth = MediaQuery.of(context).size.width;

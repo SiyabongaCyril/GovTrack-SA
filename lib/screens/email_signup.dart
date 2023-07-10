@@ -1,4 +1,5 @@
 import 'package:gov_track_sa/services/auth/govtracksa_auth.dart';
+import 'package:gov_track_sa/utilities/helper_variables.dart';
 import 'package:gov_track_sa/utilities/show_snack_bar.dart';
 import 'package:gov_track_sa/widgets/signup_login/custom_widgets.dart';
 import 'package:gov_track_sa/widgets/signup_login/custom_page.dart';
@@ -76,7 +77,6 @@ class _EmailSignupScreenState extends State<EmailSignupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    changeAppColors(context);
     return SignupLoginCustomPage(
       showButtonCircularProgressIndicator: showCircularProgressIndicator,
       onPressed: () async {
@@ -109,6 +109,7 @@ class _EmailSignupScreenState extends State<EmailSignupScreen> {
                       AppControllers.emailEmailController.text,
                       AppControllers.emailPasswordController.text);
                   changeCircularProgressIndicatorStatus(false);
+                  currentSignupPage = login;
                   navigateAndPushNamed(context, login);
                 });
               },

@@ -11,7 +11,6 @@ class StatusBarContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    changeAppColors(context);
     return Container(
       color: color,
       child: SafeArea(

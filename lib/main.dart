@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gov_track_sa/screens/account.dart';
 import 'package:gov_track_sa/utilities/app_colors.dart';
 import 'package:gov_track_sa/screens/forgot_password.dart';
 import 'package:gov_track_sa/screens/phone_signup.dart';
@@ -55,6 +56,7 @@ class MyApp extends StatelessWidget {
         mainui: (context) => const MainUI(),
         forgotpassword: (context) => const ForgotPasswordScreen(),
         settings: (context) => const SettingsScreen(),
+        account: (context) => const AccountSetting(),
       },
     );
   }

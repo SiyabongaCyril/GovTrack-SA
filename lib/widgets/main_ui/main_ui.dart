@@ -5,10 +5,10 @@ import 'menu.dart';
 import 'styles.dart';
 import '../status_bar_container.dart';
 import '../widget_barrel.dart';
-import '../../screens/governance.dart';
-import '../../screens/home.dart';
-import '../../screens/elections.dart';
-import '../../screens/profiles.dart';
+import '../../screens/main_tabs/governance.dart';
+import '../../screens/main_tabs/home.dart';
+import '../../screens/main_tabs/elections.dart';
+import '../../screens/main_tabs/profiles.dart';
 
 // Main UI root widget: HomeScreen
 class MainUI extends StatefulWidget {

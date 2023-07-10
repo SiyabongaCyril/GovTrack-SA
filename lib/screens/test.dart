@@ -40,7 +40,7 @@
 
 //   @override
 //   Widget build(BuildContext context) {
-//     changeAppColors(context);
+//     ;
 //     double statusBarHeight = MediaQuery.of(context).padding.top;
 //     double appBarHeight = kToolbarHeight;
 //     double screenHeight =
@@ -284,7 +284,7 @@
 
 //   @override
 //   Widget build(BuildContext context) {
-//     changeAppColors(context);
+//     ;
 //     double statusBarHeight = MediaQuery.of(context).padding.top;
 //     double appBarHeight = kToolbarHeight;
 //     double screenHeight =
@@ -356,7 +356,7 @@
 
 //   @override
 //   Widget build(BuildContext context) {
-//     changeAppColors(context);
+//     ;
 //     //double statusBarHeight = MediaQuery.of(context).padding.top;
 //     //double appBarHeight = kToolbarHeight;
 //     //double screenHeight =
@@ -384,25 +384,3 @@
 //   }
 // }
 
-// const bottomNavigationBarItems = [
-//   // Home
-//   BottomNavigationBarItem(
-//     icon: Icon(Icons.home_rounded),
-//     label: "Home",
-//   ),
-//   // Profiles
-//   BottomNavigationBarItem(
-//     icon: Icon(Icons.person_rounded),
-//     label: "Profiles",
-//   ),
-//   // Governance
-//   BottomNavigationBarItem(
-//     icon: Icon(Icons.gavel_rounded),
-//     label: "Governance",
-//   ),
-//   // Politics
-//   BottomNavigationBarItem(
-//     icon: Icon(Icons.people_rounded),
-//     label: "Elections",
-//   ),
-// ];
