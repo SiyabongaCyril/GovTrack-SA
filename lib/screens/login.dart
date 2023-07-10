@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gov_track_sa/services/auth/govtracksa_auth.dart';
 import 'package:gov_track_sa/widgets/signup_login/custom_widgets.dart';
 import 'package:gov_track_sa/widgets/signup_login/custom_page.dart';
@@ -21,6 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
   bool isEmailValidUponLogin = true;
   bool showCircularProgressIndicator = false;
   bool isEmailVerificationSent = false;
+  bool isPasswordHidden = true;
 
   @override
   void initState() {
@@ -84,8 +88,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    changeAppColors(context);
     checkEMailValidity();
+
     return SignupLoginCustomPage(
       showButtonCircularProgressIndicator: showCircularProgressIndicator,
       onPressed: () async {
@@ -111,8 +115,10 @@ class _LoginScreenState extends State<LoginScreen> {
               if (AppAuth.auth.currentUser?.isEmailVerified == true) {
                 changeCircularProgressIndicatorState(false);
                 lastSignUpScreen = signup;
+                currentSignupPage = login;
                 navigatePushNamedAndRemoveUntil(context, mainui);
               } else {
+                log("Sending email verification to ${FirebaseAuth.instance.currentUser}");
                 await AppAuth.auth.sendEmailVerification(context: context).then(
                   (value) async {
                     await AppAuth.auth.logOut(context: context).then(
@@ -151,9 +157,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 Text(
                   textAlign: TextAlign.justify,
                   "You need to verify your email before logging in."
-                  " An email verification link has been sent to your inbox."
-                  " Please check your email, follow the instructions and"
-                  " try again.",
+                  " An email verification link has been sent to your email address."
+                  " Please check your inbox or spam folder,"
+                  " follow the instructions and try again.",
                   style: TextStyle(
                     color: orange,
                     fontSize: 13,
@@ -175,7 +181,7 @@ class _LoginScreenState extends State<LoginScreen> {
             textFieldController: AppControllers.loginUsernameController,
             suffixWidget: isEmailValid
                 ? const Icon(
-                    Icons.check_circle_outline_outlined,
+                    Icons.check_circle_outline_rounded,
                     color: orange,
                     size: 18,
                   )
@@ -187,6 +193,26 @@ class _LoginScreenState extends State<LoginScreen> {
             hintText: "Enter your password",
             headingText: "Password:",
             textFieldController: AppControllers.loginPasswordController,
+            suffixWidget: IconButton(
+              onPressed: () {
+                setState(() {
+                  isPasswordHidden = !isPasswordHidden;
+                });
+              },
+              icon: isPasswordHidden
+                  ? const Icon(
+                      Icons.visibility_off_rounded,
+                      color: orange,
+                      size: 18,
+                    )
+                  : const Icon(
+                      Icons.visibility_rounded,
+                      color: orange,
+                      size: 18,
+                    ),
+              padding: EdgeInsets.zero,
+            ),
+            obscureText: isPasswordHidden,
           ),
 
           // Forgot password
@@ -201,6 +227,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     fontWeight: FontWeight.normal),
               ),
               onPressed: () {
+                currentSignupPage = signup;
                 navigateAndPushNamed(context, forgotpassword);
               },
             ),

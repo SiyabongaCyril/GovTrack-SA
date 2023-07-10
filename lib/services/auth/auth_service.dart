@@ -52,4 +52,9 @@ class AuthService implements AuthProvider {
     return await provider.sendPasswordResetEmail(
         context: context, email: email);
   }
+
+  @override
+  Future<void> deleteAccount({required BuildContext context}) async {
+    return provider.deleteAccount(context: context);
+  }
 }

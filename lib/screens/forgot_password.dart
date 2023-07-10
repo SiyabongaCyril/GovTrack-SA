@@ -67,7 +67,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    changeAppColors(context);
     double statusBarHeight = MediaQuery.of(context).padding.top;
     double screenHeight = MediaQuery.of(context).size.height - statusBarHeight;
     double screenWidth = MediaQuery.of(context).size.width;
@@ -99,7 +98,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               //Password Reset Link Sent Text
               linkSent
                   ? Text(
-                      "Password reset link sent to your email. Please check your inbox"
+                      "A password reset link has been sent to your email"
+                      " address. Please check your inbox or spam folder."
                       " , follow the instructions and login.",
                       style: TextStyle(
                         fontSize: proportionalHeight(screenHeight, 13),

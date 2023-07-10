@@ -2,23 +2,28 @@
 import 'package:flutter/material.dart';
 import 'package:gov_track_sa/widgets/custom_button.dart';
 import 'app_colors.dart';
-import '../services/auth/govtracksa_auth.dart';
 import 'dimension_methods.dart';
-import 'navigators.dart';
 
-Future<void> showErrorDialog(BuildContext context, String text) {
+Future<void> showErrorDialog(
+  BuildContext context,
+  String text,
+  String title,
+  void Function() onPressed,
+) {
+  double statusBarHeight = MediaQuery.of(context).padding.top;
   double deviceWidth = MediaQuery.of(context).size.width;
-  double deviceHeight = MediaQuery.of(context).size.height;
+  double deviceHeight = MediaQuery.of(context).size.height - statusBarHeight;
   return showDialog(
     useSafeArea: true,
     context: context,
     builder: (context) {
       return AlertDialog(
+        alignment: AlignmentDirectional.bottomCenter,
         backgroundColor: white,
         actionsPadding: const EdgeInsets.all(20),
-        title: const Text(
-          "Logout",
-          style: TextStyle(
+        title: Text(
+          title,
+          style: const TextStyle(
             fontSize: 15,
             fontWeight: FontWeight.bold,
             color: black,
@@ -63,11 +68,7 @@ Future<void> showErrorDialog(BuildContext context, String text) {
                 child: CustomButton(
                   textColor: white,
                   text: "Yes",
-                  onPressed: () async {
-                    await AppAuth.auth.logOut(context: context).then((value) {
-                      navigatePushNamedAndRemoveUntil(context, login);
-                    });
-                  },
+                  onPressed: onPressed,
                 ),
               ),
             ],

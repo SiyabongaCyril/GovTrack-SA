@@ -11,6 +11,7 @@ const homepage = "/homepage";
 const mainui = "/mainui";
 const forgotpassword = "/forgotpassword";
 const settings = "/settings";
+const account = "/account";
 
 // Methods for navigation
 

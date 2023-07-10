@@ -19,7 +19,6 @@ class SignupFieldContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    changeAppColors(context);
     double statusBarHeight = MediaQuery.of(context).padding.top;
     double screenHeight = MediaQuery.of(context).size.height - statusBarHeight;
     double screenWidth = MediaQuery.of(context).size.width;
@@ -58,7 +57,6 @@ class SignupOptionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    changeAppColors(context);
     double statusBarHeight = MediaQuery.of(context).padding.top;
     double screenHeight = MediaQuery.of(context).size.height - statusBarHeight;
     double screenWidth = MediaQuery.of(context).size.width;
@@ -100,6 +98,7 @@ class SignupLoginTextField extends StatelessWidget {
   final Widget? suffixWidget;
   final Function(String)? onTextFieldChanged;
   final TextInputType? keyboardType;
+  final bool obscureText;
 
   final TextEditingController textFieldController;
   const SignupLoginTextField({
@@ -111,13 +110,15 @@ class SignupLoginTextField extends StatelessWidget {
     this.suffixWidget,
     this.onTextFieldChanged,
     this.keyboardType,
+    this.obscureText = false,
   });
 
   @override
   Widget build(BuildContext context) {
-    changeAppColors(context);
     double statusBarHeight = MediaQuery.of(context).padding.top;
     double screenHeight = MediaQuery.of(context).size.height - statusBarHeight;
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Column(
       children: [
         // Text Field Heading
@@ -141,6 +142,7 @@ class SignupLoginTextField extends StatelessWidget {
         SignupFieldContainer(
           containerColor: white,
           widget: TextField(
+            obscureText: obscureText,
             keyboardType: keyboardType,
             onChanged: onTextFieldChanged,
             controller: textFieldController,
@@ -151,6 +153,10 @@ class SignupLoginTextField extends StatelessWidget {
             ),
             textAlign: TextAlign.justify,
             decoration: InputDecoration(
+              // suffixIconConstraints: BoxConstraints(
+              //     //maxHeight: proportionalHeight(screenHeight, 20),
+              //     //maxWidth: proportionalWidth(screenWidth, ),
+              //     ),
               suffixIcon: suffixWidget,
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(
