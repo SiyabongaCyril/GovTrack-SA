@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../utilities/controllers.dart';
 import 'menu.dart';
@@ -48,7 +47,6 @@ class _MainUIState extends State<MainUI> {
       // Update this to be a method in auth helper auth service
       // It's not good practice calling Firebase in the UI
       final user = FirebaseAuth.instance.currentUser;
-      log("${user ?? "No User"}");
       return user!.email.toString()[0].toUpperCase();
     }
 
@@ -219,16 +217,18 @@ class _MainUIState extends State<MainUI> {
           backgroundColor: white,
           selectedItemColor: navyBlue,
           unselectedItemColor: black,
-          showUnselectedLabels: true,
+          showUnselectedLabels: false,
+          selectedLabelStyle: const TextStyle(
+            fontSize: 13,
+            fontWeight: FontWeight.normal,
+          ),
           onTap: (index) => changeSelectedItem(index),
           //equal spacing for all items
           type: BottomNavigationBarType.fixed,
           items: bottomNavigationBarItems,
         ),
 
-        body: Center(
-          child: screens.elementAt(_selectedItemIndex),
-        ),
+        body: screens.elementAt(_selectedItemIndex),
       ),
     );
   }
@@ -239,20 +239,53 @@ const bottomNavigationBarItems = [
   BottomNavigationBarItem(
     icon: Icon(Icons.home_rounded),
     label: "Home",
+    activeIcon: SelectedItemContainer(
+      icon: Icon(Icons.home_rounded),
+    ),
   ),
   // Profiles
   BottomNavigationBarItem(
     icon: Icon(Icons.person_rounded),
     label: "Profiles",
+    activeIcon: SelectedItemContainer(
+      icon: Icon(Icons.person_rounded),
+    ),
   ),
   // Governance
   BottomNavigationBarItem(
     icon: Icon(Icons.gavel_rounded),
     label: "Governance",
+    activeIcon: SelectedItemContainer(icon: Icon(Icons.gavel_rounded)),
   ),
   // Politics
   BottomNavigationBarItem(
     icon: Icon(Icons.people_rounded),
+    activeIcon: SelectedItemContainer(
+      icon: Icon(Icons.people_rounded),
+    ),
     label: "Elections",
   ),
 ];
+
+class SelectedItemContainer extends StatelessWidget {
+  const SelectedItemContainer({
+    super.key,
+    required this.icon,
+  });
+  final Icon icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: orange,
+        borderRadius: BorderRadius.circular(15),
+        border: Border.all(
+          color: orange,
+          width: 4,
+        ),
+      ),
+      child: icon,
+    );
+  }
+}

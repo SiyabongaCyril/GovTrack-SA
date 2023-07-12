@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 const Color black = Color(0xFF000000);
 Color grey = const Color(0xFFD9D9D9);
 Color white = const Color(0xFFFFFFFF);
-const Color orange = Color.fromARGB(255, 180, 107, 65);
+//const Color orange = Color.fromARGB(255, 180, 107, 65);
 const Color navyBlue = Color(0xFF0D439B);
 const Color red = Color(0xFFE80C0C);
+const Color orange = Color(0xFFE86D24);
 const Color transparent = Colors.transparent;
 bool isDarkModeOn = false;
 

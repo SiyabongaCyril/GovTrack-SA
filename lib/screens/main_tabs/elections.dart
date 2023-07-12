@@ -5,10 +5,12 @@ class ElectionsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text(
-      "Elections: Upcoming Feature",
-      style: TextStyle(
-        color: black,
+    return const Center(
+      child: Text(
+        "Elections: Upcoming Feature, still in development. ",
+        style: TextStyle(
+          color: black,
+        ),
       ),
     );
   }

@@ -1,3 +1,5 @@
+import 'package:gov_track_sa/widgets/public_servant_card.dart';
+
 import '../screen_barrel.dart';
 
 class ProfilesScreen extends StatelessWidget {
@@ -5,11 +7,6 @@ class ProfilesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text(
-      "Profiles: Upcoming Feature",
-      style: TextStyle(
-        color: black,
-      ),
-    );
+    return const PublicServantCard();
   }
 }

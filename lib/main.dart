@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
             : const WelcomeScreen(),
       ),
 
-      theme: ThemeData(appBarTheme: const AppBarTheme(elevation: 2.0)),
+      theme: ThemeData(appBarTheme: const AppBarTheme(elevation: 0.5)),
 
       routes: {
         signup: (context) => const SignupScreen(),

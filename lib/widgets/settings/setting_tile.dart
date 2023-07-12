@@ -41,7 +41,7 @@ class SettingTile extends StatelessWidget {
               Text(
                 title,
                 style: TextStyle(
-                  fontSize: proportionalHeight(screenHeight, 17),
+                  fontSize: proportionalHeight(screenHeight, 16),
                   fontWeight: FontWeight.w600,
                 ),
               ),
