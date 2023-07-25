@@ -132,7 +132,7 @@ class _EmailSignupScreenState extends State<EmailSignupScreen> {
               hintText: "* Enter your email",
               textFieldController: AppControllers.emailEmailController,
               suffixWidget: isEmailValid
-                  ? const Icon(
+                  ? Icon(
                       Icons.check_circle_outline_outlined,
                       color: orange,
                       size: 18,

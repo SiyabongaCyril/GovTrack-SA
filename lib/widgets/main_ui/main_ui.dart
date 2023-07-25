@@ -240,7 +240,9 @@ const bottomNavigationBarItems = [
     icon: Icon(Icons.home_rounded),
     label: "Home",
     activeIcon: SelectedItemContainer(
-      icon: Icon(Icons.home_rounded),
+      icon: Icon(
+        Icons.home_rounded,
+      ),
     ),
   ),
   // Profiles

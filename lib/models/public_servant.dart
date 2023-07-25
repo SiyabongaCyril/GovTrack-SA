@@ -5,12 +5,14 @@ class PublicServant {
   int age;
   DateTime dateOfBirth;
   String? currentRole;
+  DateTime? dateOfAppointmentForRole;
   String? roleUID;
   String? roleOfTheUID;
   List<String>? previousRoles;
-  String education;
+  List<String> education;
   List<String>? otherPositions;
   String? politicalPartyAffiliation;
+  String? imageName;
 
   PublicServant({
     required this.id,
@@ -25,6 +27,7 @@ class PublicServant {
     required this.education,
     this.otherPositions,
     this.politicalPartyAffiliation,
+    this.dateOfAppointmentForRole,
   }) : assert(previousRoles != null || currentRole != null,
             'At least one of previousRoles or currentRole must be provided.');
 
@@ -32,7 +35,7 @@ class PublicServant {
         'fullName': fullName,
         'surname': surname,
         'age': age,
-        'dateOfBirth': dateOfBirth,
+        'dateOfBirth': dateOfBirth, // type: 17 November 1999
         'currentRole': currentRole ?? 'none',
         'roleUID': roleUID ?? 'none',
         'roleOfTheUID': roleOfTheUID ?? 'none',

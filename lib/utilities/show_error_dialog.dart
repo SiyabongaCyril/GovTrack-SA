@@ -11,8 +11,13 @@ Future<void> showErrorDialog(
   void Function() onPressed,
 ) {
   double statusBarHeight = MediaQuery.of(context).padding.top;
+  double appBarHeight = kToolbarHeight;
+  double bottomNavBarHeight = MediaQuery.of(context).padding.bottom;
   double deviceWidth = MediaQuery.of(context).size.width;
-  double deviceHeight = MediaQuery.of(context).size.height - statusBarHeight;
+  double deviceHeight = MediaQuery.of(context).size.height -
+      statusBarHeight -
+      bottomNavBarHeight -
+      appBarHeight;
   return showDialog(
     useSafeArea: true,
     context: context,
@@ -23,8 +28,8 @@ Future<void> showErrorDialog(
         actionsPadding: const EdgeInsets.all(20),
         title: Text(
           title,
-          style: const TextStyle(
-            fontSize: 15,
+          style: TextStyle(
+            fontSize: proportionalHeight(deviceHeight, 15),
             fontWeight: FontWeight.bold,
             color: black,
           ),
@@ -40,11 +45,12 @@ Future<void> showErrorDialog(
         ),
         content: Text(
           text,
-          style: const TextStyle(
-            fontSize: 14,
+          style: TextStyle(
+            fontSize: proportionalHeight(deviceHeight, 14),
             fontWeight: FontWeight.w300,
             color: black,
           ),
+          textAlign: TextAlign.center,
         ),
         actions: [
           Row(

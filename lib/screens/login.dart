@@ -153,7 +153,7 @@ class _LoginScreenState extends State<LoginScreen> {
           // if email verification is sent show text
           if (isEmailVerificationSent == true)
             Column(
-              children: const [
+              children: [
                 Text(
                   textAlign: TextAlign.justify,
                   "You need to verify your email before logging in."
@@ -166,7 +166,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     fontWeight: FontWeight.w300,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
               ],
@@ -180,7 +180,7 @@ class _LoginScreenState extends State<LoginScreen> {
             headingText: "Username:",
             textFieldController: AppControllers.loginUsernameController,
             suffixWidget: isEmailValid
-                ? const Icon(
+                ? Icon(
                     Icons.check_circle_outline_rounded,
                     color: orange,
                     size: 18,
@@ -200,12 +200,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 });
               },
               icon: isPasswordHidden
-                  ? const Icon(
+                  ? Icon(
                       Icons.visibility_off_rounded,
                       color: orange,
                       size: 18,
                     )
-                  : const Icon(
+                  : Icon(
                       Icons.visibility_rounded,
                       color: orange,
                       size: 18,

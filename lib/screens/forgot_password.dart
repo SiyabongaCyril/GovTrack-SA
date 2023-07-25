@@ -122,7 +122,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 textFieldController: AppControllers.forgotPasswordController,
                 keyboardType: TextInputType.emailAddress,
                 suffixWidget: isEmailValid
-                    ? const Icon(
+                    ? Icon(
                         Icons.check_circle_outline_outlined,
                         color: orange,
                         size: 18,

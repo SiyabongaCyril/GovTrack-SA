@@ -7,6 +7,11 @@ class ProfilesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const PublicServantCard();
+    return PageView.builder(
+        //add a page transition animation
+        scrollBehavior: const MaterialScrollBehavior(),
+        itemBuilder: (context, index) {
+          return cyrilRamaphosa;
+        });
   }
 }

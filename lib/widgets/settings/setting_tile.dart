@@ -7,7 +7,7 @@ class SettingTile extends StatelessWidget {
     required this.title,
     required this.description,
   });
-  final Widget iconWidget;
+  final IconData iconWidget;
   final String title;
   final String description;
 
@@ -15,8 +15,12 @@ class SettingTile extends StatelessWidget {
   Widget build(BuildContext context) {
     double statusBarHeight = MediaQuery.of(context).padding.top;
     double appBarHeight = kToolbarHeight;
-    double screenHeight =
-        MediaQuery.of(context).size.height - statusBarHeight - appBarHeight;
+
+    double bottomNavBarHeight = MediaQuery.of(context).padding.bottom;
+    double screenHeight = MediaQuery.of(context).size.height -
+        statusBarHeight -
+        appBarHeight -
+        bottomNavBarHeight;
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Container(
@@ -31,7 +35,10 @@ class SettingTile extends StatelessWidget {
             padding: EdgeInsets.only(
               right: proportionalHeight(screenHeight, 30),
             ),
-            child: iconWidget,
+            child: Icon(
+              iconWidget,
+              size: proportionalWidth(screenWidth, 20),
+            ),
           ),
 
           Column(
@@ -42,7 +49,7 @@ class SettingTile extends StatelessWidget {
                 title,
                 style: TextStyle(
                   fontSize: proportionalHeight(screenHeight, 16),
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
 
@@ -58,6 +65,7 @@ class SettingTile extends StatelessWidget {
                   style: TextStyle(
                     fontSize: proportionalHeight(screenHeight, 14),
                     fontWeight: FontWeight.w300,
+                    color: navyBlue,
                   ),
                 ),
               ),

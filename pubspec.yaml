@@ -1,5 +1,7 @@
 name: gov_track_sa
-description: A new Flutter project.
+description: GovTrackSA, a simple and user-friendly android mobile app that puts
+             all the important government information at your fingertips. 
+             Built with Flutter.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -19,7 +21,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.19.6 <3.0.0'
+  sdk: '>=2.19.6 <=3.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -38,8 +40,9 @@ dependencies:
   flutter_svg: ^2.0.5
   firebase_core: ^2.14.0
   firebase_auth: ^4.6.3
-  google_sign_in: ^6.1.4
   email_validator: ^2.1.17
+  font_awesome_flutter: ^10.4.0
+  url_launcher: ^6.1.12
 
 dev_dependencies:
   flutter_test:

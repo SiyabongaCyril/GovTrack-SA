@@ -29,7 +29,7 @@ class AccountSetting extends StatelessWidget {
             child: const SettingTile(
                 description:
                     "Permanently delete your account and all associated data. This action cannot be undone, and you will lose access to your account.",
-                iconWidget: Icon(Icons.delete),
+                iconWidget: Icons.delete,
                 title: "Delete Account"),
           )
         ],

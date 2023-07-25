@@ -17,7 +17,7 @@ class SettingsScreen extends StatelessWidget {
               navigateAndPushNamed(context, account);
             },
             child: const SettingTile(
-              iconWidget: Icon(Icons.person),
+              iconWidget: Icons.person,
               title: "Account",
               description:
                   "View and update your account information, including personal details and preferences.",
@@ -25,21 +25,21 @@ class SettingsScreen extends StatelessWidget {
           ),
 
           const SettingTile(
-            iconWidget: Icon(Icons.notifications),
+            iconWidget: Icons.notifications,
             title: "Notifications/Alerts",
             description:
                 "Configure your notification and alert settings to stay informed about important updates and events.",
           ),
 
           const SettingTile(
-            iconWidget: Icon(Icons.storage),
+            iconWidget: Icons.storage,
             title: "Storage",
             description:
                 "Manage your storage options, including cloud storage settings and local storage preferences.",
           ),
 
           const SettingTile(
-            iconWidget: Icon(Icons.support),
+            iconWidget: Icons.support,
             title: "Support",
             description:
                 "Access support resources, FAQs, and contact options for assistance with the app or any issues you encounter.",
