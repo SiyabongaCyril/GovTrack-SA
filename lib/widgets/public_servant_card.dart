@@ -1,4 +1,5 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gov_track_sa/utilities/month_number.dart';
 import 'package:gov_track_sa/utilities/pair.dart';
 import 'main_ui/drop_down_item.dart';
 import 'social_media_icon_button.dart';
@@ -21,6 +22,7 @@ class PublicServantCard extends StatefulWidget {
     this.facebookLink,
     this.twitterLink,
     this.instagramLink,
+    this.politicalParty,
   });
   final String imagePath;
   final String fullName;
@@ -33,6 +35,7 @@ class PublicServantCard extends StatefulWidget {
   final Map<String, Pair<int, String>>? previousRoles;
   final Map<String, String>? education;
   final Map<String, Pair<int, String>>? otherPositions;
+  final String? politicalParty;
   final String? facebookLink;
   final String? twitterLink;
   final String? instagramLink;
@@ -43,10 +46,10 @@ class PublicServantCard extends StatefulWidget {
 
 class _PublicServantCardState extends State<PublicServantCard> {
   bool isBookmarked = false;
-  bool isRoleOpen = false;
-  bool isPreviousRolesOpen = false;
-  bool isEducationOpen = false;
-  bool isOtherPositionsOpen = false;
+  bool isRoleOpen = true;
+  bool isPreviousRolesOpen = true;
+  bool isEducationOpen = true;
+  bool isOtherPositionsOpen = true;
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +62,10 @@ class _PublicServantCardState extends State<PublicServantCard> {
         appBarHeight -
         bottomNavBarHeight;
     double screenWidth = MediaQuery.of(context).size.width;
+
+    final educationListLength = widget.education?.length ?? 0;
+    final previousRolesListLength = widget.previousRoles?.length ?? 0;
+    final otherPositionsListLength = widget.otherPositions?.length ?? 0;
 
     return SingleChildScrollView(
       child: Card(
@@ -181,7 +188,9 @@ class _PublicServantCardState extends State<PublicServantCard> {
 
                             // Date of birth
                             Text(
-                              "Born 17 November 1952",
+                              "Born ${widget.dateOfBirth.day} "
+                              "${getMonthName(widget.dateOfBirth.month)}"
+                              "${widget.dateOfBirth.year}",
                               style: TextStyle(
                                 fontSize: proportionalHeight(screenHeight, 13),
                                 fontWeight: FontWeight.w300,
@@ -236,13 +245,7 @@ class _PublicServantCardState extends State<PublicServantCard> {
                   title: "Role",
                   content: [
                     Text(
-                      "The president of South Africa is the head of state and head of government of the Republic of South Africa. The president directs the executive branch of the federal government and is the commander-in-chief of the South African National Defence Force. Between 1961 and 1994, the office of head of state was the state presidency. The president is elected by the National Assembly, the lower house of Parliament, and is usually the leader of the largest party, which has been the African National Congress since the first multiracial election was held on 27 April 1994. The Constitution limits the president's time in office to two five-year terms. The president is required to be a member of the National Assembly at the time of the election. Upon election, the president immediately resigns their seat for the duration of the presidential term. The president may be removed either by a motion of no-confidence or an impeachment trial."
-                      "The president of South Africa is the head of state and head of government of the Republic of South Africa. The president directs the executive branch of the federal government and is the commander-in-chief of the South African National Defence Force. Between 1961 and 1994, the office of head of state was the state presidency. The president is elected by the National Assembly, the lower house of Parliament, and is usually the leader of the largest party, which has been the African National Congress since the first multiracial election was held on 27 April 1994. The Constitution limits the president's time in office to two five-year terms. The president is required to be a member of the National Assembly at the time of the election. Upon election, the president immediately resigns their seat for the duration of the presidential term. The president may be removed either by a motion of no-confidence or an impeachment trial."
-                      "The president of South Africa is the head of state and head of government of the Republic of South Africa. The president directs the executive branch of the federal government and is the commander-in-chief of the South African National Defence Force. Between 1961 and 1994, the office of head of state was the state presidency. The president is elected by the National Assembly, the lower house of Parliament, and is usually the leader of the largest party, which has been the African National Congress since the first multiracial election was held on 27 April 1994. The Constitution limits the president's time in office to two five-year terms. The president is required to be a member of the National Assembly at the time of the election. Upon election, the president immediately resigns their seat for the duration of the presidential term. The president may be removed either by a motion of no-confidence or an impeachment trial."
-                      "The president of South Africa is the head of state and head of government of the Republic of South Africa. The president directs the executive branch of the federal government and is the commander-in-chief of the South African National Defence Force. Between 1961 and 1994, the office of head of state was the state presidency. The president is elected by the National Assembly, the lower house of Parliament, and is usually the leader of the largest party, which has been the African National Congress since the first multiracial election was held on 27 April 1994. The Constitution limits the president's time in office to two five-year terms. The president is required to be a member of the National Assembly at the time of the election. Upon election, the president immediately resigns their seat for the duration of the presidential term. The president may be removed either by a motion of no-confidence or an impeachment trial."
-                      "The president of South Africa is the head of state and head of government of the Republic of South Africa. The president directs the executive branch of the federal government and is the commander-in-chief of the South African National Defence Force. Between 1961 and 1994, the office of head of state was the state presidency. The president is elected by the National Assembly, the lower house of Parliament, and is usually the leader of the largest party, which has been the African National Congress since the first multiracial election was held on 27 April 1994. The Constitution limits the president's time in office to two five-year terms. The president is required to be a member of the National Assembly at the time of the election. Upon election, the president immediately resigns their seat for the duration of the presidential term. The president may be removed either by a motion of no-confidence or an impeachment trial."
-                      "The president of South Africa is the head of state and head of government of the Republic of South Africa. The president directs the executive branch of the federal government and is the commander-in-chief of the South African National Defence Force. Between 1961 and 1994, the office of head of state was the state presidency. The president is elected by the National Assembly, the lower house of Parliament, and is usually the leader of the largest party, which has been the African National Congress since the first multiracial election was held on 27 April 1994. The Constitution limits the president's time in office to two five-year terms. The president is required to be a member of the National Assembly at the time of the election. Upon election, the president immediately resigns their seat for the duration of the presidential term. The president may be removed either by a motion of no-confidence or an impeachment trial."
-                      "The president of South Africa is the head of state and head of government of the Republic of South Africa. The president directs the executive branch of the federal government and is the commander-in-chief of the South African National Defence Force. Between 1961 and 1994, the office of head of state was the state presidency. The president is elected by the National Assembly, the lower house of Parliament, and is usually the leader of the largest party, which has been the African National Congress since the first multiracial election was held on 27 April 1994. The Constitution limits the president's time in office to two five-year terms. The president is required to be a member of the National Assembly at the time of the election. Upon election, the president immediately resigns their seat for the duration of the presidential term. The president may be removed either by a motion of no-confidence or an impeachment trial.",
+                      widget.roleDescription,
                       style: TextStyle(
                         fontSize: proportionalHeight(screenHeight, 14),
                         fontWeight: FontWeight.w300,
@@ -264,25 +267,32 @@ class _PublicServantCardState extends State<PublicServantCard> {
                   isItemOpen: isPreviousRolesOpen,
                   title: "Previous Roles",
                   content: [
-                    SizedBox(height: proportionalHeight(screenHeight, 5)),
-                    Text(
-                      widget.previousRoles!.keys.elementAt(0),
-                      style: TextStyle(
-                        fontSize: proportionalHeight(screenHeight, 13),
-                        fontWeight: FontWeight.w300,
+                    if (previousRolesListLength == 0) ...{
+                      Text(
+                        "None",
+                        style: TextStyle(
+                          fontSize: proportionalHeight(screenHeight, 13),
+                          fontWeight: FontWeight.w300,
+                        ),
+                        textAlign: TextAlign.start,
                       ),
-                      textAlign: TextAlign.start,
-                    ),
-                    SizedBox(height: proportionalHeight(screenHeight, 5)),
-                    Text(
-                      "Deputy President of South Africa (2014 to 2018)",
-                      style: TextStyle(
-                        fontSize: proportionalHeight(screenHeight, 14),
-                        fontWeight: FontWeight.w300,
-                      ),
-                      textAlign: TextAlign.start,
-                    ),
-                    SizedBox(height: proportionalHeight(screenHeight, 5)),
+                    } else ...{
+                      for (var i = 0; i < previousRolesListLength; i++) ...{
+                        Text(
+                          "${widget.previousRoles?.keys.elementAt(i)}"
+                          " (${widget.previousRoles?.values.elementAt(i).getFirstItem}"
+                          " to ${widget.previousRoles?.values.elementAt(i).getSecondItem})",
+                          style: TextStyle(
+                            fontSize: proportionalHeight(screenHeight, 13),
+                            fontWeight: FontWeight.w300,
+                          ),
+                          textAlign: TextAlign.start,
+                        ),
+                        SizedBox(
+                          height: proportionalHeight(screenHeight, 5),
+                        ),
+                      }
+                    },
                   ],
                 ),
               ),
@@ -298,24 +308,31 @@ class _PublicServantCardState extends State<PublicServantCard> {
                   isItemOpen: isEducationOpen,
                   title: "Education",
                   content: [
-                    SizedBox(height: proportionalHeight(screenHeight, 5)),
-                    Text(
-                      "Bachelor of Arts degree in Political Science and Sociology (University of South Africa)",
-                      style: TextStyle(
-                        fontSize: proportionalHeight(screenHeight, 14),
-                        fontWeight: FontWeight.w300,
+                    if (educationListLength == 0) ...{
+                      Text(
+                        "None",
+                        style: TextStyle(
+                          fontSize: proportionalHeight(screenHeight, 13),
+                          fontWeight: FontWeight.w300,
+                        ),
+                        textAlign: TextAlign.start,
                       ),
-                      textAlign: TextAlign.start,
-                    ),
-                    SizedBox(height: proportionalHeight(screenHeight, 5)),
-                    Text(
-                      "Bachelor of Technology degree in Policing (Tshwane University of Technology)",
-                      style: TextStyle(
-                        fontSize: proportionalHeight(screenHeight, 14),
-                        fontWeight: FontWeight.w300,
-                      ),
-                      textAlign: TextAlign.start,
-                    ),
+                    } else ...{
+                      for (var i = 0; i < educationListLength; i++) ...{
+                        Text(
+                          "${widget.education?.keys.elementAt(i)}"
+                          " (${widget.education?.values.elementAt(i)})",
+                          style: TextStyle(
+                            fontSize: proportionalHeight(screenHeight, 13),
+                            fontWeight: FontWeight.w300,
+                          ),
+                          textAlign: TextAlign.start,
+                        ),
+                        SizedBox(
+                          height: proportionalHeight(screenHeight, 5),
+                        )
+                      }
+                    },
                   ],
                 ),
               ),
@@ -331,32 +348,40 @@ class _PublicServantCardState extends State<PublicServantCard> {
                   isItemOpen: isOtherPositionsOpen,
                   title: "Other Positions",
                   content: [
-                    SizedBox(height: proportionalHeight(screenHeight, 5)),
-                    Text(
-                      "Member of the National Executive Committee of the African National Congress (2007 to date)",
-                      style: TextStyle(
-                        fontSize: proportionalHeight(screenHeight, 14),
-                        fontWeight: FontWeight.w300,
+                    if (otherPositionsListLength == 0) ...{
+                      Text(
+                        "None",
+                        style: TextStyle(
+                          fontSize: proportionalHeight(screenHeight, 13),
+                          fontWeight: FontWeight.w300,
+                        ),
+                        textAlign: TextAlign.start,
                       ),
-                      textAlign: TextAlign.start,
-                    ),
-                    SizedBox(height: proportionalHeight(screenHeight, 5)),
-                    Text(
-                      "Member of the National Working Committee of the African National Congress (2007 to date)",
-                      style: TextStyle(
-                        fontSize: proportionalHeight(screenHeight, 14),
-                        fontWeight: FontWeight.w300,
-                      ),
-                      textAlign: TextAlign.start,
-                    ),
+                    } else ...{
+                      for (var i = 0; i < otherPositionsListLength; i++) ...{
+                        Text(
+                          "${widget.otherPositions?.keys.elementAt(i)}"
+                          " (${widget.otherPositions?.values.elementAt(i).getFirstItem}"
+                          " to ${widget.otherPositions?.values.elementAt(i).getSecondItem})",
+                          style: TextStyle(
+                            fontSize: proportionalHeight(screenHeight, 14),
+                            fontWeight: FontWeight.w300,
+                          ),
+                          textAlign: TextAlign.start,
+                        ),
+                        SizedBox(
+                          height: proportionalHeight(screenHeight, 5),
+                        ),
+                      }
+                    },
                   ],
                 ),
               ),
 
               // Affiliations
-              const Text(
-                "Affiliated with the African National Congress (ANC).",
-                style: TextStyle(
+              Text(
+                "Affiliated with the ${widget.politicalParty}",
+                style: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w300,
                 ),
@@ -407,15 +432,27 @@ PublicServantCard cyrilRamaphosa = PublicServantCard(
   fullName: "Cyril Matamela",
   surname: "Ramaphosa",
   age: 71,
+  politicalParty: "African National Congress (ANC)",
   dateOfBirth: DateTime(1952, 11, 17),
   role: "President of the Republic of South Africa",
   roleStartDate: DateTime(2018, 2, 15),
   roleDescription:
-      "The president of South Africa is the head of state and head of government of the Republic of South Africa. The president directs the executive branch of the federal government and is the commander-in-chief of the South African National Defence Force. Between 1961 and 1994, the office of head of state was the state presidency. The president is elected by the National Assembly, the lower house of Parliament, and is usually the leader of the largest party, which has been the African National Congress since the first multiracial election was held on 27 April 1994. The Constitution limits the president's time in office to two five-year terms. The president is required to be a member of the National Assembly at the time of the election. Upon election, the president immediately resigns their seat for the duration of the presidential term. The president may be removed either by a motion of no-confidence or an impeachment trial.",
+      "The president of South Africa is the head of state and head of government"
+      " of the Republic of South Africa. The president directs the executive"
+      " branch of the federal government and is the commander-in-chief of the"
+      " South African National Defence Force. Between 1961 and 1994, the office"
+      " of head of state was the state presidency. The president is elected by"
+      " the National Assembly, the lower house of Parliament, and is usually the"
+      " leader of the largest party, which has been the African National "
+      " Congress since the first multiracial election was held on 27 April 1994."
+      " The Constitution limits the president's time in office to two five-year"
+      " terms. The president is required to be a member of the National Assembly"
+      " at the time of the election. Upon election, the president immediately"
+      " resigns their seat for the duration of the presidential term. The"
+      " president may be removed either by a motion of no-confidence or an"
+      " impeachment trial",
   previousRoles: {
     "Deputy President of South Africa": Pair(first: 2014, second: "2018"),
-    "President of the African National Congress":
-        Pair(first: 2017, second: "date"),
     "Deputy President of the African National Congress":
         Pair(first: 2012, second: "2017"),
     "President of the African National Congress Youth League":
@@ -436,30 +473,198 @@ PublicServantCard cyrilRamaphosa = PublicServantCard(
         Pair(first: 2007, second: "date"),
   },
 );
+PublicServantCard thandiModise = PublicServantCard(
+  imagePath: "thandi_modise.jpg",
+  fullName: "Thandi",
+  surname: "Modise",
+  age: 68,
+  politicalParty: "African National Congress (ANC)",
+  dateOfBirth: DateTime(1953, 12, 25),
+  role: "Chairperson of the National Council of Provinces",
+  roleStartDate: DateTime(2019, 5, 22),
+  roleDescription:
+      "The chairperson of the National Council of Provinces is the presiding officer"
+      " of the upper house of the Parliament of South Africa. The chairperson is"
+      " responsible for overseeing the proceedings of the council and ensuring that"
+      " debates are conducted in an orderly manner. They also represent the council"
+      " in its relations with other institutions and perform other functions as"
+      " assigned by the constitution or legislation.",
+  previousRoles: {
+    "Premier of North West Province": Pair(first: 2010, second: "2014"),
+    "Member of the National Assembly of South Africa":
+        Pair(first: 1994, second: "date"),
+  },
+  education: const {
+    "Matric": "Dikwankwetla High School",
+  },
+);
+PublicServantCard bhekiCele = PublicServantCard(
+  imagePath: "bheki_cele.jpg",
+  fullName: "Bheki",
+  surname: "Cele",
+  age: 69,
+  politicalParty: "African National Congress (ANC)",
+  dateOfBirth: DateTime(1952, 4, 22),
+  role: "Minister of Police",
+  roleStartDate: DateTime(2018, 2, 26),
+  roleDescription:
+      "The minister of police is responsible for overseeing the South African Police"
+      " Service (SAPS) and implementing policies related to law enforcement and"
+      " crime prevention. The minister works to ensure the safety and security of"
+      " citizens and communities across the country.",
+  previousRoles: {
+    "Member of the National Assembly of South Africa":
+        Pair(first: 2009, second: "date"),
+    "Commissioner of the South African Police Service":
+        Pair(first: 2009, second: "2011"),
+  },
+  education: const {
+    "Bachelor of Arts degree": "University of Zululand",
+    "Bachelor of Science degree in Education": "University of Zululand",
+  },
+);
+PublicServantCard nosiviweMapisaNqakula = PublicServantCard(
+  imagePath: "novisiwe_nqakula.jpg",
+  fullName: "Nosiviwe",
+  surname: "Mapisa-Nqakula",
+  age: 65,
+  politicalParty: "African National Congress (ANC)",
+  dateOfBirth: DateTime(1956, 11, 13),
+  role: "Minister of Defence and Military Veterans",
+  roleStartDate: DateTime(2019, 5, 30),
+  roleDescription:
+      "The minister of defence and military veterans is responsible for overseeing"
+      " the South African National Defence Force (SANDF) and ensuring national"
+      " security and defense. The minister also works to address the needs and"
+      " welfare of military veterans.",
+  previousRoles: {
+    "Minister of Correctional Services": Pair(first: 2014, second: "2019"),
+    "Minister of Home Affairs": Pair(first: 2012, second: "2014"),
+  },
+  education: const {
+    "Bachelor of Arts degree in Education": "University of Zululand",
+  },
+);
+PublicServantCard davidMabuza = PublicServantCard(
+  imagePath: "david_mabuza.jpg",
+  fullName: "David",
+  surname: "Mabuza",
+  age: 62,
+  politicalParty: "African National Congress (ANC)",
+  dateOfBirth: DateTime(1960, 8, 25),
+  role: "Deputy President of South Africa",
+  roleStartDate: DateTime(2018, 2, 27),
+  roleDescription:
+      "The deputy president of South Africa is the second-highest executive"
+      " position in the government. The deputy president supports the president in"
+      " carrying out their duties and may take on specific responsibilities as"
+      " assigned by the president.",
+  previousRoles: {
+    "Premier of Mpumalanga": Pair(first: 2009, second: "2018"),
+  },
+  education: const {
+    "Bachelor of Arts degree": "University of South Africa",
+  },
+);
+PublicServantCard thokoDidiza = PublicServantCard(
+  imagePath: "thoko_didiza.jpg",
+  fullName: "Thoko",
+  surname: "Didiza",
+  age: 52,
+  politicalParty: "African National Congress (ANC)",
+  dateOfBirth: DateTime(1969, 9, 27),
+  role: "Minister of Agriculture, Land Reform and Rural Development",
+  roleStartDate: DateTime(2019, 5, 30),
+  roleDescription:
+      "The minister of agriculture, land reform, and rural development is"
+      " responsible for implementing policies related to agriculture, land reform,"
+      " and rural development to promote food security and economic growth in rural"
+      " areas.",
+  previousRoles: {
+    "Minister of Agriculture and Land Affairs":
+        Pair(first: 1999, second: "2006"),
+    "Minister of Public Works": Pair(first: 2006, second: "2008"),
+  },
+  education: const {
+    "Master's degree in Administration": "University of Pretoria",
+  },
+);
+PublicServantCard fikileMbalula = PublicServantCard(
+  imagePath: "fikile_mbalula.jpg",
+  fullName: "Fikile",
+  surname: "Mbalula",
+  age: 50,
+  politicalParty: "African National Congress (ANC)",
+  dateOfBirth: DateTime(1971, 4, 8),
+  role: "Minister of Transport",
+  roleStartDate: DateTime(2019, 5, 30),
+  roleDescription:
+      "The minister of transport is responsible for overseeing transportation"
+      " systems and infrastructure in South Africa, including road networks,"
+      " railways, airports, and public transport.",
+  previousRoles: {
+    "Minister of Police": Pair(first: 2017, second: "2019"),
+    "Minister of Sport and Recreation": Pair(first: 2010, second: "2017"),
+  },
+  education: const {
+    "Bachelor's degree in Political Science and Sociology":
+        "University of the North",
+    "Honorary Doctorate in Public Administration": "University of Limpopo",
+  },
+);
+PublicServantCard gwenRamokgopa = PublicServantCard(
+  imagePath: "gwen_ramokgopa.jpg",
+  fullName: "Gwen",
+  surname: "Ramokgopa",
+  age: 56,
+  politicalParty: "African National Congress (ANC)",
+  dateOfBirth: DateTime(1965, 9, 23),
+  role: "High Commissioner of South Africa to Kenya",
+  roleStartDate: DateTime(2021, 3, 17),
+  roleDescription:
+      "The high commissioner of South Africa to Kenya represents the country's"
+      " interests and fosters diplomatic relations between South Africa and Kenya.",
+  previousRoles: {
+    "Mayor of Tshwane": Pair(first: 2016, second: "2019"),
+    "Member of the National Assembly of South Africa":
+        Pair(first: 2002, second: "2016"),
+  },
+  education: const {
+    "Bachelor of Medicine and Bachelor of Surgery": "University of Natal",
+  },
+);
+PublicServantCard ronaldLamola = PublicServantCard(
+  imagePath: "ronald_lamola.jpg",
+  fullName: "Ronald",
+  surname: "Lamola",
+  age: 38,
+  politicalParty: "African National Congress (ANC)",
+  dateOfBirth: DateTime(1983, 9, 20),
+  role: "Minister of Justice and Correctional Services",
+  roleStartDate: DateTime(2019, 5, 30),
+  roleDescription:
+      "The minister of justice and correctional services is responsible for the"
+      " administration of justice, legal services, and correctional services in"
+      " South Africa.",
+  previousRoles: {
+    "Member of the National Assembly of South Africa":
+        Pair(first: 2014, second: "date"),
+  },
+  education: const {
+    "Bachelor of Laws degree": "University of Venda",
+    "Bachelor of Arts degree in International Politics":
+        "University of South Africa",
+  },
+);
 
-// function: return a month name from a month number
-String getMonthName(int monthNumber) {
-  // Create a list of month names in order
-  List<String> months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
-  ];
-
-  // Validate the month number to be within the range 1-12
-  if (monthNumber < 1 || monthNumber > 12) {
-    throw ArgumentError('Invalid month number: $monthNumber');
-  }
-
-  // Subtract 1 from the month number to access the corresponding index in the list
-  return months[monthNumber - 1];
-}
+List<Widget> leaders = [
+  cyrilRamaphosa,
+  thandiModise,
+  bhekiCele,
+  nosiviweMapisaNqakula,
+  davidMabuza,
+  thokoDidiza,
+  fikileMbalula,
+  gwenRamokgopa,
+  ronaldLamola
+];

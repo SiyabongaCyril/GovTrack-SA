@@ -9,9 +9,10 @@ class ProfilesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return PageView.builder(
         //add a page transition animation
+        itemCount: leaders.length,
         scrollBehavior: const MaterialScrollBehavior(),
         itemBuilder: (context, index) {
-          return cyrilRamaphosa;
+          return leaders[index];
         });
   }
 }

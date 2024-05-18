@@ -6,6 +6,6 @@ class Pair<T, U> {
   final U? second;
 
   Pair({this.first, this.second});
-  get firstItem => first;
-  get secondItem => second;
+  get getFirstItem => first;
+  get getSecondItem => second;
 }
